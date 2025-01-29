@@ -11,7 +11,6 @@ import {
 import { Header } from "@/components/header/Header";
 import { useEffect, useState } from "react";
 
-// TODO: Solve hydration error
 export default function RootLayout({
   children,
 }: {
