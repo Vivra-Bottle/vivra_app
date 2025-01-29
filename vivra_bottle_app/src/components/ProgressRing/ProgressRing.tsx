@@ -4,40 +4,40 @@ import {
   Text,
   RingProgress as MantineRingProgress,
   Center,
-  ActionIcon,
 } from "@mantine/core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 export interface ProgressRingProps {
   value: number;
   size: number;
   thickness: number;
+  colorMode: string;
 }
-
 // TODO figure out if i need a useState or how to capture change in data
 export const ProgressRing: FC<ProgressRingProps> = ({
   value,
   size,
   thickness,
+  colorMode,
+  ...props
 }) => {
   return (
     <Flex>
       <MantineRingProgress
+        style={{ ...props }}
         label={
           value == 100 ? (
             <Center>
-              <ActionIcon color="teal" radius="100px" size={"90px"}>
-                <FontAwesomeIcon
-                  icon={faCircleCheck}
-                  style={{
-                    fontSize: "50px", // Adjust size as needed
-                    fontWeight: "10",
-                    background: "#12b886",
-                    color: "#c3fae8",
-                  }}
-                ></FontAwesomeIcon>
-              </ActionIcon>
+              <img
+                src="/assets/icons/circle-check-solid.svg"
+                style={{
+                  borderRadius: "50%",
+                  blockSize: "90px",
+                  fontSize: "50px",
+                  fontWeight: "10",
+                  background: "#12b886",
+                  border: "2px solid #12b886",
+                }}
+              ></img>
             </Center>
           ) : (
             <Center>
