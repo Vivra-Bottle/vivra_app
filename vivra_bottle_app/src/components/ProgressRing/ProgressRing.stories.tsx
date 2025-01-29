@@ -29,7 +29,6 @@ export const ProgressRingExample: Story = {
     value: 40,
     size: 220,
     thickness: 14,
-    colorMode: "dark",
   },
   decorators: [
     (Story: FC) => (
@@ -50,6 +49,5 @@ export const CompleteProgressRingExample: Story = {
     value: 100,
     size: 220,
     thickness: 14,
-    colorMode: "dark",
   },
 };

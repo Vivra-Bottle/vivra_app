@@ -10,14 +10,12 @@ export interface ProgressRingProps {
   value: number;
   size: number;
   thickness: number;
-  colorMode: string;
 }
 // TODO figure out if i need a useState or how to capture change in data
 export const ProgressRing: FC<ProgressRingProps> = ({
   value,
   size,
   thickness,
-  colorMode,
   ...props
 }) => {
   return (

@@ -1,0 +1,45 @@
+.action_icon {
+    margin-left: auto;
+  }
+
+.burger {
+    flex: 0 0 auto;
+  }
+
+.header {
+    position: fixed;
+    top:0;
+    left:0;
+    height: 59px;
+    width:100%;
+    margin-bottom: 120px;
+    background-color: var(--mantine-color-body);
+    border-bottom: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+    padding-left: var(--mantine-spacing-md);
+    padding-right: var(--mantine-spacing-md);
+    z-index:1000;
+  }
+  
+  .inner {
+    height: 59px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .color_icon {
+    height: 18px;
+    width:18px;
+    align-items: "center";
+    justify-content: "center";
+  }
+
+  .vivra_icon {
+    height: 56px;
+    align-items: "center";
+    justify-content: "center";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
