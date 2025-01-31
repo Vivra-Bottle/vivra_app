@@ -1,0 +1,12 @@
+.chevron {
+    height: 12;
+    width: 12;
+    align-items: "center";
+    justify-content: "center";
+    background-color: 'transparent';
+  }
+
+.theme_icon {
+    background-color: 'transparent';
+
+}
