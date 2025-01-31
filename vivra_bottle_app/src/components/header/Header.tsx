@@ -10,9 +10,10 @@ import {
 } from "@mantine/core";
 
 import classes from "./Header.module.css";
+import { Drawer } from "../drawer/Drawer";
 
 export const Header: FC = () => {
-  const [opened, { toggle }] = useDisclosure(false);
+  const [opened, { toggle, close }] = useDisclosure(false);
   const { setColorScheme } = useMantineColorScheme();
 
   const colorMode = useComputedColorScheme("light");
@@ -27,6 +28,7 @@ export const Header: FC = () => {
           size="sm"
           hiddenFrom="sm"
         />
+        <Drawer opened={opened} close={close}></Drawer>
         <img
           className={classes.vivra_icon}
           src={
