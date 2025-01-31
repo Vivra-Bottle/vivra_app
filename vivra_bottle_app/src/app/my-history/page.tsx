@@ -1,12 +1,12 @@
 import { ProgressRing } from "@/components/progressRing/ProgressRing";
 import { Box } from "@mantine/core";
+import classes from "./myHistory.module.css";
 
-import classes from "./myProfile.module.css";
-
-export default function MyProfile() {
+// Use module styling
+export default function MyHistory() {
   return (
     <Box className={classes.box} display="Flex">
-      <p>hi, how are you</p>
+      <p>Replace progress Ring with chart component</p>
       <ProgressRing value={67} size={220} thickness={12}></ProgressRing>
     </Box>
   );
