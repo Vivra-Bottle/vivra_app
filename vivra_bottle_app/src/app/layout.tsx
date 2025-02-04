@@ -6,7 +6,6 @@ import {
   LoadingOverlay,
   MantineProvider,
   mantineHtmlProps,
-  useMantineColorScheme,
 } from "@mantine/core";
 import { Header } from "@/components/header/Header";
 import { useEffect, useState } from "react";
@@ -28,6 +27,7 @@ export default function RootLayout({
   if (!mounted)
     return (
       <html {...mantineHtmlProps}>
+        <head />
         <body>
           <MantineProvider theme={DEFAULT_THEME} defaultColorScheme="light">
             <LoadingOverlay />
@@ -38,6 +38,7 @@ export default function RootLayout({
 
   return (
     <html {...mantineHtmlProps}>
+      <head />
       <body>
         <MantineProvider theme={DEFAULT_THEME} defaultColorScheme="light">
           <Header />
