@@ -16,7 +16,6 @@ export const Drawer: FC<HeaderProps> = ({ opened, close }) => {
       <NavLink href="/my-summary" label="Summary" />
       <NavLink href="/my-history" label="History" />
       <NavLink href="/about-us" label="About us" />
-      <NavLink href="/settings" label="Settings" />
     </MantineDrawer>
   );
 };

@@ -1,6 +1,5 @@
 // import { Box } from "@mantine/core";
-import { Box, Skeleton as MantineSkeleton } from "@mantine/core";
-import classes from "@/app/page.module.css";
+import { Box } from "@mantine/core";
 
 export default function AboutUs() {
   return (

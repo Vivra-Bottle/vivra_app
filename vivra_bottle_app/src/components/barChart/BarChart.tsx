@@ -2,7 +2,6 @@ import { FC } from "react";
 import { BarChart as MantineBarChart } from "@mantine/charts";
 
 import { data } from "./data";
-import { Flex } from "@mantine/core";
 
 // export interface BarChartProps {
 //   data: {
