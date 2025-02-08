@@ -4,6 +4,7 @@ import { FC } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import {
   ActionIcon,
+  Box,
   Burger,
   useComputedColorScheme,
   useMantineColorScheme,
@@ -11,6 +12,7 @@ import {
 
 import classes from "./Header.module.css";
 import { Drawer } from "../drawer/Drawer";
+import Image from "next/image";
 
 export const Header: FC = () => {
   const [opened, { toggle, close }] = useDisclosure(false);
@@ -29,14 +31,20 @@ export const Header: FC = () => {
           hiddenFrom="sm"
         />
         <Drawer opened={opened} close={close}></Drawer>
-        <img
-          className={classes.vivra_icon}
-          src={
-            colorMode == "dark"
-              ? "/assets/icons/vivra-dark.svg"
-              : "/assets/icons/vivra-light.svg"
-          }
-        ></img>
+        <Box className={classes.vivra_icon}>
+          <Image
+            key={colorMode}
+            priority
+            alt="vivra icon"
+            src={
+              colorMode == "dark"
+                ? "/assets/icons/vivra-dark.svg"
+                : "/assets/icons/vivra-light.svg"
+            }
+            width={56}
+            height={56}
+          ></Image>
+        </Box>
         <ActionIcon
           className={classes.action_icon}
           variant="outline"
@@ -46,13 +54,16 @@ export const Header: FC = () => {
             setColorScheme(colorMode === "light" ? "dark" : "light")
           }
         >
-          <img
+          <Image
+            alt={colorMode == "dark" ? "sun icon" : "moon icon"}
             className={classes.color_icon}
             src={
               colorMode == "dark"
                 ? "/assets/icons/sun-icon.svg"
                 : "/assets/icons/moon-solid.svg"
             }
+            height={18}
+            width={18}
           />
         </ActionIcon>
       </div>
