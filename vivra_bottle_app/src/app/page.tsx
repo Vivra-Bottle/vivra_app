@@ -1,10 +1,14 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { Text, Title } from "@mantine/core";
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <Title size="xl" fw={900} variant="gradient">
+          Welcome to Vivra.
+        </Title>
         <Image
           className={styles.logo}
           src="/next.svg"

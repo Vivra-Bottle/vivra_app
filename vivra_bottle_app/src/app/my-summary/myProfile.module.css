@@ -1,6 +1,6 @@
-.box {
+.stack {
   flex-direction: column;
   align-items: center;
-  padding-top: 59px;
+  padding-top: 70px;
 }
 

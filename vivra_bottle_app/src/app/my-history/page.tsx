@@ -1,5 +1,6 @@
 "use client";
 import { BarChart } from "@/components/barChart/BarChart";
+import { SparklineChart } from "@/components/sparklineChart/sparklineChart";
 
 // Use module styling
 export default function MyHistory() {
@@ -7,6 +8,7 @@ export default function MyHistory() {
     <div>
       <p>History Page</p>
       <BarChart></BarChart>
+      <SparklineChart></SparklineChart>
     </div>
   );
 }

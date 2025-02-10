@@ -1,23 +1,29 @@
+"use client";
 import { ProgressRing } from "@/components/progressRing/ProgressRing";
-import { ActionIcon, Box } from "@mantine/core";
+import { Badge, Group, Stack, Title } from "@mantine/core";
 
 import classes from "./myProfile.module.css";
+import { WaterQualBadge } from "@/components/waterQualBadge/WaterQualBadge";
 
 export default function MyProfile() {
   return (
-    <Box className={classes.box} display="Flex">
-      <p>Consumption</p>
+    <Stack className={classes.stack}>
+      <Title order={4}>Summary</Title>
+      <Title order={6}>Water Consumption</Title>
       {/* TO DO work on this */}
-      <ActionIcon
-        size="auto"
-        variant="default"
-        aria-label="ActionIcon the same size as inputs"
-      >
-        Goal: 1.65 L/day
-      </ActionIcon>
-      <p>Goal: 1.65 L/day</p>
-      <p>You drank: 1.1 L</p>
-      <ProgressRing value={78} size={220} thickness={12}></ProgressRing>
-    </Box>
+      <ProgressRing value={80} size={220} thickness={12}></ProgressRing>
+      <Group>
+        <Badge variant="light" color="blue">
+          Goal: 1.65 L/day
+        </Badge>
+        <Badge variant="light" color="rgba(39, 176, 167, 1)">
+          You drank: 1.1 L
+        </Badge>
+      </Group>
+      <Title order={6} mt={20}>
+        Water Purity
+      </Title>
+      <WaterQualBadge value={80}></WaterQualBadge>
+    </Stack>
   );
 }
