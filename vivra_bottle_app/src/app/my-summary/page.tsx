@@ -21,9 +21,9 @@ export default function MyProfile() {
         </Badge>
       </Group>
       <Title order={6} mt={20}>
-        Water Purity
+        Water Quality
       </Title>
-      <WaterQualBadge value={80}></WaterQualBadge>
+      <WaterQualBadge value={88} conductivityVal={76}></WaterQualBadge>
     </Stack>
   );
 }
