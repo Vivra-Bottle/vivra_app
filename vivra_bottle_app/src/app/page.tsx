@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import { Text, Title } from "@mantine/core";
+import { Title } from "@mantine/core";
 
 export default function Home() {
   return (
