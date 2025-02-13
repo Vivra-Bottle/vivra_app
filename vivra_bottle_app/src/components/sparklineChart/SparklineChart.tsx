@@ -9,15 +9,17 @@ import { Sparkline as MantineSparklineChart } from "@mantine/charts";
 //   }[];
 // }
 
-// TODO figure out if i need a useState or how to capture change in data
+// TODO change sparklineChart to line chart with threshold bc/ sparkline does not have x and y axis
 export const SparklineChart: FC = () => {
+  const datain = [10, 20, 40, 20, 40, 10, 50];
+
   return (
     <MantineSparklineChart
       w={200}
       h={60}
-      data={[10, 20, 40, 20, 40, 10, 50]}
+      data={datain}
       curveType="linear"
-      color="blue"
+      color="Blue"
       fillOpacity={0.6}
       strokeWidth={2}
     />
