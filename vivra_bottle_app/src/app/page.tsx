@@ -1,5 +1,5 @@
 "use client";
-import { ProgressRing } from "@/components/progressRing/ProgressRing";
+import { ProgressRing } from "@/components/ProgressRing/ProgressRing";
 import { Badge, Group, Stack, Title } from "@mantine/core";
 
 import classes from "./page.module.css";
