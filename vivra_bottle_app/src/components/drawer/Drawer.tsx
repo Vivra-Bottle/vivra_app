@@ -13,8 +13,7 @@ export interface HeaderProps {
 export const Drawer: FC<HeaderProps> = ({ opened, close }) => {
   return (
     <MantineDrawer opened={opened} onClose={close} title="Options">
-      <NavLink href="/" label="Home" />
-      <NavLink href="/my-summary" label="Summary" />
+      <NavLink href="/" label="Summary" />
       <NavLink href="/my-history" label="History" />
       <NavLink href="/about-us" label="About us" />
     </MantineDrawer>
