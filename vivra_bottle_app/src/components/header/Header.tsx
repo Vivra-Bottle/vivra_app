@@ -28,7 +28,6 @@ export const Header: FC = () => {
           opened={opened}
           onClick={toggle}
           size="sm"
-          hiddenFrom="sm"
         />
         <Drawer opened={opened} close={close}></Drawer>
         <Box className={classes.vivra_icon}>
