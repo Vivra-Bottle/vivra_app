@@ -26,6 +26,7 @@ export const ProgressRing: FC<ProgressRingProps> = ({
           value == 100 ? (
             <Center>
               <img
+                alt="Check-mark icon"
                 src="/assets/icons/circle-check-solid.svg"
                 style={{
                   borderRadius: "50%",

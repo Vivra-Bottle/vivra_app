@@ -19,7 +19,10 @@ export default function AboutUs() {
   return (
     <div>
       <Stack display="Flex" mt={59} mb={59}>
-        <Image src="/assets/pictures/water-bottle.jpg"></Image>
+        <Image
+          alt="Water Bottle Picture"
+          src="/assets/pictures/water-bottle.jpg"
+        ></Image>
         <Stack className={classes.about}>
           <Title order={2}>About us</Title>
           <Text>
@@ -43,10 +46,14 @@ export default function AboutUs() {
         </Stack>
         <Stack className={classes.founders}>
           <Title order={2}>Founders</Title>
-          <Image radius="md" src="/assets/pictures/team-picture.jpg"></Image>
+          <Image
+            radius="md"
+            alt="Team picture"
+            src="/assets/pictures/team-picture.jpg"
+          ></Image>
         </Stack>
         <Stack className={classes.story}>
-          <Title order={2}>Vivra's Story</Title>
+          <Title order={2}>Vivra&apos;s Story</Title>
           <VivraTimeline active={1} items={vivraTimelineItems}></VivraTimeline>
         </Stack>
       </Stack>
