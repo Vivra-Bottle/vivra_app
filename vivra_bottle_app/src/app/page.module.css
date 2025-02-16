@@ -3,3 +3,8 @@
   align-items: center;
   padding-top: 70px;
 }
+
+.loading {
+  margin-right: 10%;
+  margin-left: 10%;
+}
