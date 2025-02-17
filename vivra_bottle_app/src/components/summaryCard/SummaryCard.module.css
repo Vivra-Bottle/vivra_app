@@ -1,0 +1,68 @@
+.card {
+    background-color: var(--mantine-color-body);
+    /* background-color: var(--mantine-color-blue-light); */
+  }
+  
+  .label {
+    
+    font-family:
+      Greycliff CF,
+      var(--mantine-font-family);
+    font-weight: 700;
+    line-height: 1;
+  }
+  
+  .lead {
+    font-family:
+      Greycliff CF,
+      var(--mantine-font-family);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1;
+  }
+  
+  .inner {
+    row-gap: 0;
+    @media (max-width: 36em) {
+      flex-direction: column;
+      justify-content:center;
+      row-gap: 0;
+    }
+  }
+  
+  .graph {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-self: center;
+  
+    @media (max-width: 36em) {
+      justify-content: center;
+      margin-top: var(--mantine-spacing-md);
+    }
+  }
+
+  .stats {
+    align-self: flex-start; /* Align to the start on large screens */
+    margin-top:15px;
+
+    @media (max-width: 36em) {
+      align-self: center;
+      text-align: center;
+    }
+  }
+  
+  .cardStatPhone {
+    display: none;
+
+    @media (max-width: 36em) {
+      display: block;
+    }
+  }
+
+  .cardStats {
+    
+    @media (max-width: 36em) {
+      display: none;
+    }
+  }
