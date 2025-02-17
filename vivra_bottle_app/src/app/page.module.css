@@ -11,6 +11,9 @@
 
 .name{
   align-self: center;
+  @media (max-width: 36em) {
+    align-self: center;
+  }
 }
 
 .consumptionStats {
@@ -25,10 +28,49 @@
 
 .consumptionBadge {
   height: 42px;
-  font-size: clamp(10px, 4vw, 12px);
+  font-size: clamp(10px, 12px, 12px);
   border-radius: 8px;
   margin-top: 20px;
     @media (max-width: 36em) {
       margin-top:0px;
     }
 }
+
+.tempBadge {
+  height: 150px;
+  width: 220px;
+  font-size: clamp(10px, 40px, 40px); /* Dynamically adjust font size */
+  border-radius: 8px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center; /* Vertically center text */
+  justify-content: center; /* Horizontally center text */
+  text-align: center; /* Ensure text is centered */
+  line-height: 1; /* Prevent extra spacing */
+  padding: 0; /* Ensure no extra space */
+  margin-left: 40px;
+  margin-right: 15px;
+  
+  @media (max-width: 36em) {
+    margin-top: 0px;
+    margin-right: 0;
+    margin-left: 0;
+    height: 100px;
+    margin-bottom: 10px;
+    
+  }
+}
+
+.tempText {
+    font-size: 14px;
+    width: 128px;
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    white-space: normal;
+    text-align: center;
+    display: block;
+  
+  @media (max-width: 36em) {
+    font-size: 11px; 
+  }
+  }
