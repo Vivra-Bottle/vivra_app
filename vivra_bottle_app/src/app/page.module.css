@@ -1,10 +1,34 @@
 .stack {
-  flex-direction: column;
-  align-items: center;
+  align-items:center;
   padding-top: 70px;
+  background-color: var(--mantine-color-blue-light);
 }
 
 .loading {
   margin-right: 10%;
   margin-left: 10%;
+}
+
+.name{
+  align-self: center;
+}
+
+.consumptionStats {
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: 36em) {
+    margin-top:15px;
+    flex-direction: row;
+  }
+}
+
+.consumptionBadge {
+  height: 42px;
+  font-size: clamp(10px, 4vw, 12px);
+  border-radius: 8px;
+  margin-top: 20px;
+    @media (max-width: 36em) {
+      margin-top:0px;
+    }
 }
