@@ -1,46 +1,75 @@
 import { FC } from "react";
 import { LineChart } from "@mantine/charts";
+import { TooltipProps } from "recharts";
+import { Paper, Text } from "@mantine/core";
 
 export interface ConductivityLineChartProps {
   data: { time: string; conductivity: number }[];
 }
 
+// Tooltip
+function ChartTooltip(props: TooltipProps<any, any>) {
+  const item = props?.payload?.[0]?.payload;
+  if (!item) return null;
+  return (
+    <Paper px="md" py="sm" withBorder shadow="md" radius="md" mt={5}>
+      <Text fw={500} mb={5}>
+        {item.time}
+      </Text>
+      <Text fz="sm">Conductivity: {item.conductivity} µS/cm</Text>
+    </Paper>
+  );
+}
+
 export const ConductivityLineChart: FC<ConductivityLineChartProps> = ({
   data,
 }) => {
+  // offset values calculations based on max y value
+  const maxy = 2200;
+  // Adjust fadeStart to finetune where the transition between colours starts
+  const fadeStart = 100;
+  const greenoffset = ((maxy - 800 + fadeStart) / maxy) * 100;
+  const yellowoffset = ((maxy - 1000 + fadeStart) / maxy) * 100;
   return (
     <div>
       <LineChart
-        withTooltip={false}
+        withDots={true}
         type="gradient"
         gradientStops={[
-          { offset: 0, color: "red.5" }, // Green at the lowest conductivity values
-          { offset: 800, color: "yellow.4" }, // Green up to 800
-          { offset: 1000, color: "lime.5" },
+          { offset: 0, color: "red.5" },
+          { offset: yellowoffset, color: "yellow.4" },
+          { offset: greenoffset, color: "lime.5" },
         ]}
         h={300}
-        // w={300}
         data={data}
         dataKey="time"
         xAxisProps={{
-          tickFormatter: (time: string) => time, // Format x-axis ticks as time
+          tickFormatter: (time: string) => time,
         }}
         yAxisLabel="conductivity"
         yAxisProps={{
-          domain: [0, 2000], // Set range for conductivity (y-axis)
+          domain: [0, maxy],
         }}
         referenceLines={[
           { y: 1000, label: "Poor", color: "red" },
-          { y: 800, label: "Caution", color: "yellow" }, // Reference line for conductivity threshold
-          // { x: "12:00 PM", label: "Midday", color: "blue" }, // Reference line for midday
+          { y: 800, label: "Caution", color: "yellow" },
         ]}
         series={[
           {
-            name: "conductivity", // Data series name
-            color: "indigo", // Line color
+            name: "conductivity",
+            color: "indigo",
           },
         ]}
-      />
+        strokeWidth={3}
+        tooltipProps={{
+          content: ChartTooltip,
+          cursor: {
+            stroke: "grey",
+            strokeWidth: 1,
+            strokeDasharray: "5 5",
+          },
+        }}
+      ></LineChart>
     </div>
   );
 };
