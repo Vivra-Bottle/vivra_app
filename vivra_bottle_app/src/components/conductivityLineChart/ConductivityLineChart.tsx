@@ -1,11 +1,11 @@
 import { FC } from "react";
+import { Paper, Text } from "@mantine/core";
 import { LineChart } from "@mantine/charts";
 import { TooltipProps } from "recharts";
 import {
   ValueType,
   NameType,
 } from "recharts/types/component/DefaultTooltipContent";
-import { Paper, Text } from "@mantine/core";
 
 export interface ConductivityLineChartProps {
   data: { time: string; conductivity: number }[];
