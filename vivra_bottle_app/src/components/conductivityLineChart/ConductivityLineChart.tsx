@@ -1,6 +1,10 @@
 import { FC } from "react";
 import { LineChart } from "@mantine/charts";
 import { TooltipProps } from "recharts";
+import {
+  ValueType,
+  NameType,
+} from "recharts/types/component/DefaultTooltipContent";
 import { Paper, Text } from "@mantine/core";
 
 export interface ConductivityLineChartProps {
@@ -8,7 +12,7 @@ export interface ConductivityLineChartProps {
 }
 
 // Tooltip
-function ChartTooltip(props: TooltipProps<any, any>) {
+function ChartTooltip(props: TooltipProps<ValueType, NameType>) {
   const item = props?.payload?.[0]?.payload;
   if (!item) return null;
   return (
