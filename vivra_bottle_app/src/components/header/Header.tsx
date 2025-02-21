@@ -95,16 +95,17 @@ export const Header: FC = () => {
         <Box className={classes.vivra_icon}>
           <Link href="/" passHref legacyBehavior>
             <Image
+              className={classes.vivra_logo}
               key={colorMode}
               priority
               alt="vivra icon"
               src={
                 colorMode == "dark"
-                  ? "/assets/icons/vivra-dark.svg"
-                  : "/assets/icons/vivra-light.svg"
+                  ? "/assets/icons/logo-dark-white.png"
+                  : "/assets/icons/logo-light.png"
               }
-              width={56}
-              height={56}
+              width={140}
+              height={54}
             ></Image>
           </Link>
         </Box>

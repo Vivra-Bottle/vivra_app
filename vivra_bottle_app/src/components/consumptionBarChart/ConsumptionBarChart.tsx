@@ -9,12 +9,13 @@ import {
 } from "recharts/types/component/DefaultTooltipContent";
 import { Paper, Text } from "@mantine/core";
 
-export interface BarChartProps {
+export interface ConsumptionBarChartProps {
   data: {
     day: string;
     consumption: number;
   }[];
   goal: number;
+  average: number;
 }
 
 function ChartTooltip(props: TooltipProps<ValueType, NameType>) {
@@ -31,7 +32,11 @@ function ChartTooltip(props: TooltipProps<ValueType, NameType>) {
 }
 
 // TODO figure out if i need a useState or how to capture change in data
-export const BarChart: FC<BarChartProps> = ({ data, goal }) => {
+export const ConsumptionBarChart: FC<ConsumptionBarChartProps> = ({
+  data,
+  goal,
+  average,
+}) => {
   return (
     <MantineBarChart
       mt={"100px"}
@@ -50,6 +55,12 @@ export const BarChart: FC<BarChartProps> = ({ data, goal }) => {
           y: goal,
           color: "blue.6",
           label: "Goal",
+        },
+        {
+          y: average,
+          color: "green.6",
+          label: "avg",
+          strokeDasharray: "10 10",
         },
       ]}
     />

@@ -14,3 +14,13 @@
   padding-top: 59px;
 }
 
+.hydrationScoreBadge {
+  height: 170px;
+  width:170px;
+  font-size: clamp(12px, 42px, 42px);
+}
+
+
+.weeklyHistTitle{
+  align-self: center;
+}

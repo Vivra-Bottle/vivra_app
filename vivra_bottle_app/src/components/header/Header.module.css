@@ -49,3 +49,6 @@
     gap: 10px;
   }
 
+  .vivra_logo {
+    transform: translateX(-45px);
+  }
