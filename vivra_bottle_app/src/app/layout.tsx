@@ -1,6 +1,7 @@
 "use client";
 
 import "@mantine/core/styles.css";
+import "@mantine/charts/styles.css";
 import {
   DEFAULT_THEME,
   LoadingOverlay,
