@@ -1,52 +1,57 @@
+"use-client";
 import { FC } from "react";
 import { BarChart as MantineBarChart } from "@mantine/charts";
+import "@mantine/charts/styles.css";
+import { TooltipProps } from "recharts";
+import {
+  ValueType,
+  NameType,
+} from "recharts/types/component/DefaultTooltipContent";
+import { Paper, Text } from "@mantine/core";
 
-import { data } from "./data";
+export interface BarChartProps {
+  data: {
+    day: string;
+    consumption: number;
+  }[];
+  goal: number;
+}
 
-// export interface BarChartProps {
-//   data: {
-//     day: string;
-//     consumption: number;
-//     purity: number; // Porbably will delete this
-//   }[];
-// }
+function ChartTooltip(props: TooltipProps<ValueType, NameType>) {
+  const item = props?.payload?.[0]?.payload;
+  if (!item) return null;
+  return (
+    <Paper px="md" py="sm" withBorder shadow="md" radius="md" mt={5}>
+      <Text fw={500} mb={5}>
+        {item.day}
+      </Text>
+      <Text fz="sm">Consumption: {item.consumption} L</Text>
+    </Paper>
+  );
+}
 
 // TODO figure out if i need a useState or how to capture change in data
-export const BarChart: FC = () => {
+export const BarChart: FC<BarChartProps> = ({ data, goal }) => {
   return (
     <MantineBarChart
       mt={"100px"}
       h={300}
       data={data}
-      dataKey="month"
-      series={[
-        { name: "Smartphones", color: "violet.6" },
-        { name: "Laptops", color: "blue.6" },
-        { name: "Tablets", color: "teal.6" },
-      ]}
+      dataKey="day"
+      series={[{ name: "consumption", color: "blue.6" }]}
+      getBarColor={(value) => (value > goal ? "blue.6" : "red.8")}
       tickLine="y"
       barProps={{ radius: [10, 10, 0, 0] }}
-      withTooltip={false}
-      //   tooltipProps={() =>
-      //     data.length > 0 ? (
-      //       <div
-      //         style={{
-      //           padding: "8px",
-      //           background: "white",
-      //           borderRadius: "4px",
-      //           boxShadow: "0px 0px 10px rgba(0,0,0,0.2)",
-      //         }}
-      //       >
-      //         <strong>{data[0].month}</strong>
-      //         <br />
-      //         📱 Smartphones: {data[0].Smartphones}
-      //         <br />
-      //         💻 Laptops: {data[0].Laptops}
-      //         <br />
-      //         📟 Tablets: {data[0].Tablets}
-      //       </div>
-      //     ) : null
-      //   }
+      tooltipProps={{
+        content: ChartTooltip,
+      }}
+      referenceLines={[
+        {
+          y: goal,
+          color: "blue.6",
+          label: "Goal",
+        },
+      ]}
     />
   );
 };
