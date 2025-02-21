@@ -3,7 +3,7 @@ import { BarChart } from "@/components/barChart/BarChart";
 import { Stack, Title, Badge } from "@mantine/core";
 import classes from "./myHistory.module.css";
 
-export const consumptionData = [
+const consumptionData = [
   { day: "Monday", consumption: 1.5 },
   { day: "Tuesday", consumption: 2.2 },
   { day: "Wednesday", consumption: 1.8 },
@@ -13,7 +13,7 @@ export const consumptionData = [
   { day: "Sunday", consumption: 1.9 },
 ];
 
-export const goal = 2.0; // Example daily goal in liters
+const goal = 2.0; // Example daily goal in liters
 const hydrationScore = 98;
 
 export default function MyHistory() {
