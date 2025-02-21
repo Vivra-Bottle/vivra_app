@@ -1,6 +1,5 @@
 "use client";
 import { BarChart } from "@/components/barChart/BarChart";
-import { SparklineChart } from "@/components/sparklineChart/SparklineChart";
 import { Stack, Title, Badge } from "@mantine/core";
 import classes from "./myHistory.module.css";
 
