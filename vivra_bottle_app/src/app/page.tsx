@@ -85,7 +85,7 @@ export default function Summary() {
         <ConductivitySummaryCard
           data={conductivityData}
         ></ConductivitySummaryCard>
-        <div style={{ marginTop: "200px" }}></div>
+        <div style={{ marginTop: "50px" }}></div>
       </Stack>
     </div>
   );
