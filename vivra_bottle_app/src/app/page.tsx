@@ -4,8 +4,8 @@ import { Badge, Stack, Title, Text } from "@mantine/core";
 
 import classes from "./page.module.css";
 import { SummaryCard } from "@/components/summaryCard/SummaryCard";
-import { ConductivityLineChart } from "@/components/conductivityLineChart/ConductivityLineChart";
 import { TempQualBadge } from "@/components/tempQualBadge/TempQualBadge";
+import { ConductivitySummaryCard } from "@/components/conductivitySummaryCard/ConductivitySummaryCard";
 
 // TODO Delete and Replace with name from database
 const name = "Mary";
@@ -82,12 +82,11 @@ export default function Summary() {
             </Stack>
           }
         ></SummaryCard>
+        <ConductivitySummaryCard
+          data={conductivityData}
+        ></ConductivitySummaryCard>
         <div style={{ marginTop: "200px" }}></div>
       </Stack>
-      <div style={{ marginTop: "100px" }}>
-        <p>hi</p>
-      </div>
-      <ConductivityLineChart data={conductivityData}></ConductivityLineChart>
     </div>
   );
 }

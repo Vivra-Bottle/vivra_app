@@ -1,0 +1,39 @@
+.card {
+    background-color: var(--mantine-color-body);
+    /* background-color: var(--mantine-color-blue-light); */
+  }
+  
+  .label {
+    font-family:
+      Greycliff CF,
+      var(--mantine-font-family);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 20px;
+    @media (max-width: 36em) {
+    align-self: center;
+  }
+  }
+  
+  .inner {
+    row-gap: 0;
+    justify-content:center;
+    flex-direction: column;
+    align-self: center;
+    width:419px;
+    @media (max-width: 36em) {
+      max-width:270px;
+    }
+
+    .stats {
+      
+    }
+
+    .conductivityBadge {
+      border-radius: 8px;
+      width:126px;
+      height: 50px;
+      font-size: clamp(10px, 14px, 14px);
+    }
+    
+  }

@@ -8,7 +8,7 @@ import {
 } from "recharts/types/component/DefaultTooltipContent";
 
 export interface ConductivityLineChartProps {
-  data: { time: string; conductivity: number }[];
+  data: { time: string; conductivity: number | undefined }[];
 }
 
 // Tooltip
