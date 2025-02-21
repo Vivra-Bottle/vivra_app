@@ -1,10 +1,5 @@
 import { FC } from "react";
-import {
-  Badge,
-  Button,
-  Group,
-  //Text
-} from "@mantine/core";
+import { Badge, Button, Group } from "@mantine/core";
 import { useToggle } from "@mantine/hooks";
 
 export interface WaterQualBadgeProps {

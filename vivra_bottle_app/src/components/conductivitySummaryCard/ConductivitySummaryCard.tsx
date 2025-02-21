@@ -12,6 +12,7 @@ export const ConductivitySummaryCard: FC<ConductivitySummaryCardProps> = ({
   data,
 }) => {
   const lastestConductivity = data.at(-1)?.conductivity ?? "undefined";
+
   return (
     <Card withBorder p="xl" radius="md" className={classes.card}>
       <Stack className={classes.inner}>
@@ -45,12 +46,15 @@ export const ConductivitySummaryCard: FC<ConductivitySummaryCardProps> = ({
               ? "Caution"
               : "Poor"}
           </Badge>
+
           <Badge
-            variant="light"
-            color="rgba(39, 176, 167, 1)"
-            className={classes.consumptionBadge}
+            variant="outline"
+            color={"rgba(39, 176, 167, 1)"}
+            className={classes.conductivityBadge}
           >
-            You drank: L
+            {lastestConductivity}{" "}
+            <span style={{ textTransform: "none" }}>µ</span>S/
+            <span style={{ textTransform: "none" }}>cm</span>
           </Badge>
         </Group>
         <ConductivityLineChart data={data}></ConductivityLineChart>
