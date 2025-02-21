@@ -1,13 +1,17 @@
 "use client";
 import { BarChart } from "@/components/barChart/BarChart";
 import { SparklineChart } from "@/components/sparklineChart/SparklineChart";
-import { Stack } from "@mantine/core";
+import { Stack, Title, Badge } from "@mantine/core";
+import classes from "./myHistory.module.css";
 
-// Use module styling
 export default function MyHistory() {
+  const hydrationScore = 98;
   return (
-    <Stack>
-      <p>History Page</p>
+    <Stack className={classes.stack}>
+      <Title order={2} className={classes.hydrationTitle}>
+        Hydration Score
+      </Title>
+      <Badge>{hydrationScore}</Badge>
       <BarChart></BarChart>
       <SparklineChart></SparklineChart>
       <div style={{ height: "200px" }}></div>

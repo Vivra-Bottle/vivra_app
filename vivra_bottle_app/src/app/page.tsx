@@ -30,63 +30,61 @@ const conductivityData = [
 
 export default function Summary() {
   return (
-    <div>
-      <Stack className={classes.stack}>
-        <Title order={2} className={classes.name}>
-          Welcome, {name}
-        </Title>
-        <SummaryCard
-          title="Water Consumption"
-          graph={
-            <ProgressRing
-              value={percentageDrank}
-              size={220}
-              thickness={12}
-            ></ProgressRing>
-          }
-          cardStats={
-            <Stack className={classes.consumptionStats}>
-              <Badge
-                variant="light"
-                color="blue"
-                className={classes.consumptionBadge}
-              >
-                Goal: {consumptionGoal} L/day
-              </Badge>
-              <Badge
-                variant="light"
-                color="rgba(39, 176, 167, 1)"
-                className={classes.consumptionBadge}
-              >
-                You drank: {amountDrank} L
-              </Badge>
-            </Stack>
-          }
-        ></SummaryCard>
-        <Title order={4} mt={20}>
-          Water Quality
-        </Title>
-        <SummaryCard
-          title="Temperature"
-          graph={
-            <Badge variant="light" color="blue" className={classes.tempBadge}>
-              {temp}°
+    <Stack className={classes.stack}>
+      <Title order={2} className={classes.name}>
+        Welcome, {name}
+      </Title>
+      <SummaryCard
+        title="Water Consumption"
+        graph={
+          <ProgressRing
+            value={percentageDrank}
+            size={220}
+            thickness={12}
+          ></ProgressRing>
+        }
+        cardStats={
+          <Stack className={classes.consumptionStats}>
+            <Badge
+              variant="light"
+              color="blue"
+              className={classes.consumptionBadge}
+            >
+              Goal: {consumptionGoal} L/day
             </Badge>
-          }
-          cardStats={
-            <Stack className={classes.consumptionStats}>
-              <TempQualBadge temperature={56}></TempQualBadge>
-              <Text className={classes.tempText}>
-                High, Medium, and Low risk of bacterial growth
-              </Text>
-            </Stack>
-          }
-        ></SummaryCard>
-        <ConductivitySummaryCard
-          data={conductivityData}
-        ></ConductivitySummaryCard>
-        <div style={{ marginTop: "50px" }}></div>
-      </Stack>
-    </div>
+            <Badge
+              variant="light"
+              color="rgba(39, 176, 167, 1)"
+              className={classes.consumptionBadge}
+            >
+              You drank: {amountDrank} L
+            </Badge>
+          </Stack>
+        }
+      ></SummaryCard>
+      <Title order={4} mt={20}>
+        Water Quality
+      </Title>
+      <SummaryCard
+        title="Temperature"
+        graph={
+          <Badge variant="light" color="blue" className={classes.tempBadge}>
+            {temp}°
+          </Badge>
+        }
+        cardStats={
+          <Stack className={classes.consumptionStats}>
+            <TempQualBadge temperature={56}></TempQualBadge>
+            <Text className={classes.tempText}>
+              High, Medium, and Low risk of bacterial growth
+            </Text>
+          </Stack>
+        }
+      ></SummaryCard>
+      <ConductivitySummaryCard
+        data={conductivityData}
+      ></ConductivitySummaryCard>
+      <div style={{ marginTop: "50px" }}></div>
+    </Stack>
   );
 }

@@ -11,9 +11,6 @@
 
 .name{
   align-self: center;
-  @media (max-width: 36em) {
-    align-self: center;
-  }
 }
 
 .consumptionStats {
