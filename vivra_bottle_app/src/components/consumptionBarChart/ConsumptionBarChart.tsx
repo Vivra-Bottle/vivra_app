@@ -12,6 +12,7 @@ import { Paper, Text } from "@mantine/core";
 export interface ConsumptionBarChartProps {
   data: {
     day: string;
+    dayabbrev: string;
     consumption: number;
   }[];
   goal: number;
@@ -39,7 +40,7 @@ export const ConsumptionBarChart: FC<ConsumptionBarChartProps> = ({
 }) => {
   return (
     <MantineBarChart
-      mt={"100px"}
+      mt={"20px"}
       h={300}
       data={data}
       dataKey="day"
@@ -63,6 +64,12 @@ export const ConsumptionBarChart: FC<ConsumptionBarChartProps> = ({
           strokeDasharray: "10 10",
         },
       ]}
+      xAxisProps={{
+        tickFormatter: (day: string, index: number) => {
+          const isSmallScreen = window.innerWidth < 640;
+          return isSmallScreen ? data[index].dayabbrev : day;
+        },
+      }}
     />
   );
 };

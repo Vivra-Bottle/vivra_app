@@ -1,17 +1,16 @@
 "use client";
-import { ConsumptionBarChart } from "@/components/consumptionBarChart/ConsumptionBarChart";
 import { Stack, Title, Badge } from "@mantine/core";
 import classes from "./myHistory.module.css";
-import { Label } from "recharts";
+import { ConsumptionHistoryCard } from "@/components/consumptionHistoryCard/ConsumptionHistoryCard";
 
 const consumptionData = [
-  { day: "Monday", consumption: 1.5 },
-  { day: "Tuesday", consumption: 2.2 },
-  { day: "Wednesday", consumption: 1.8 },
-  { day: "Thursday", consumption: 2.5 },
-  { day: "Friday", consumption: 3.0 },
-  { day: "Saturday", consumption: 2.7 },
-  { day: "Sunday", consumption: 1.9 },
+  { day: "Monday", consumption: 1.5, dayabbrev: "M" },
+  { day: "Tuesday", consumption: 2.2, dayabbrev: "T" },
+  { day: "Wednesday", consumption: 1.8, dayabbrev: "W" },
+  { day: "Thursday", consumption: 2.5, dayabbrev: "T" },
+  { day: "Friday", consumption: 3.0, dayabbrev: "F" },
+  { day: "Saturday", consumption: 2.7, dayabbrev: "S" },
+  { day: "Sunday", consumption: 1.9, dayabbrev: "S" },
 ];
 
 const averageConsumption =
@@ -36,11 +35,11 @@ export default function MyHistory() {
       <Title order={2} className={classes.weeklyHistTitle}>
         Last 7-days:
       </Title>
-      <ConsumptionBarChart
+      <ConsumptionHistoryCard
         average={averageConsumption}
         data={consumptionData}
         goal={goal}
-      ></ConsumptionBarChart>
+      ></ConsumptionHistoryCard>
       <div style={{ height: "200px" }}></div>
     </Stack>
   );
