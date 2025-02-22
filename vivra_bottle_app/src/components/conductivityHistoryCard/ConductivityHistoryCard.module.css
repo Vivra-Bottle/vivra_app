@@ -1,0 +1,60 @@
+.card {
+    background-color: var(--mantine-color-body);
+    margin-inline: 15px;
+    width: clamp(270px,620px,620px);
+    padding-right: 50px;
+
+    @media (max-width: 640px) {
+      max-width:clamp(270px,330px,330px);
+    }
+  }
+  
+  .title {
+    font-size: x-large;
+    font-family:
+      Greycliff CF,
+      var(--mantine-font-family);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 20px;
+    align-self: center;
+  }
+  
+  .inner {
+    row-gap: 0;
+    justify-content:center;
+    flex-direction: column;
+    align-self: center;
+    width: clamp(260px,550px,550px);
+    @media (max-width: 640px) {
+      max-width:clamp(260px,300px,300px);
+    }
+  }
+
+    .averageBadge {
+      margin-top: 30px;
+      transform: translateX(20px);
+      border-radius: 8px;
+      height: 50px;
+      flex-grow: 1;
+      font-size:large;
+      @media (max-width: 640px) {
+        margin-top: 10px;
+        align-self: center;
+        transform: none;
+        width: clamp(250px,250px,300px);
+        font-size:small;
+      }
+    }
+
+    .chart{
+    transform: translateX(-10px);
+
+    }
+
+    .averageSection {
+      flex-direction: column;
+      @media (max-width: 640px) {
+        flex-direction: column-reverse;
+      }
+    }
