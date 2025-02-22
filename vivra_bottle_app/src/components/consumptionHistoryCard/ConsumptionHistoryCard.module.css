@@ -7,7 +7,6 @@
     @media (max-width: 640px) {
       max-width:clamp(270px,330px,330px);
     }
-    /* background-color: var(--mantine-color-blue-light); */
   }
   
   .title {
