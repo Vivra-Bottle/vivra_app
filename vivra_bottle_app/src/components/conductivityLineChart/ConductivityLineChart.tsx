@@ -50,7 +50,7 @@ export const ConductivityLineChart: FC<ConductivityLineChartProps> = ({
         xAxisProps={{
           tickFormatter: (time: string) => time,
         }}
-        yAxisLabel="conductivity"
+        yAxisLabel="Conductivity (µS/cm)"
         yAxisProps={{
           domain: [0, maxy],
         }}

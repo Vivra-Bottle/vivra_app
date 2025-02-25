@@ -54,7 +54,7 @@ export const ConductivityHistoryLineChart: FC<
             return isSmallScreen ? data[index].dayabbrev : day;
           },
         }}
-        yAxisLabel="conductivity"
+        yAxisLabel="Conductivity (µS/cm)"
         yAxisProps={{
           domain: [0, maxy],
         }}
