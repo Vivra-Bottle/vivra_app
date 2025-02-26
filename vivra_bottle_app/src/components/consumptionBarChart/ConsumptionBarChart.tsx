@@ -7,7 +7,7 @@ import {
   ValueType,
   NameType,
 } from "recharts/types/component/DefaultTooltipContent";
-import { Paper, Text } from "@mantine/core";
+import { Paper, Text, useComputedColorScheme } from "@mantine/core";
 
 export interface ConsumptionBarChartProps {
   data: {
@@ -38,14 +38,16 @@ export const ConsumptionBarChart: FC<ConsumptionBarChartProps> = ({
   goal,
   average,
 }) => {
+  const colorMode = useComputedColorScheme("light");
+  const goalColor = colorMode == "dark" ? "yellow.2" : "dark.7";
   return (
     <MantineBarChart
       mt={"20px"}
       h={300}
       data={data}
       dataKey="day"
-      series={[{ name: "consumption", color: "blue.6" }]}
-      getBarColor={(value) => (value > goal ? "blue.6" : "red.8")}
+      series={[{ name: "consumption", color: "green.6" }]}
+      getBarColor={(value) => (value > goal ? "green.6" : "red.8")}
       tickLine="y"
       barProps={{ radius: [10, 10, 0, 0] }}
       tooltipProps={{
@@ -54,7 +56,7 @@ export const ConsumptionBarChart: FC<ConsumptionBarChartProps> = ({
       referenceLines={[
         {
           y: goal,
-          color: "blue.6",
+          color: goalColor,
           label: "Goal",
         },
         {
