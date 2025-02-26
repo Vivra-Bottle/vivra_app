@@ -85,6 +85,7 @@ export default function Summary() {
       ></SummaryCard>
       <ConductivitySummaryCard
         data={conductivityData}
+        tooltipLabel="The text for the tooltip will be added here"
       ></ConductivitySummaryCard>
       <div style={{ marginTop: "50px" }}></div>
     </Stack>

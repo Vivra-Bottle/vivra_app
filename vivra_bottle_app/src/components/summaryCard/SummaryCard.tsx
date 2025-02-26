@@ -37,7 +37,7 @@ export const SummaryCard: FC<SummaryCardProps> = ({
               w={220}
               withArrow
               transitionProps={{ duration: 200 }}
-              label="This is where the tooltip text will go"
+              label={tooltipLabel}
               position="bottom"
             >
               <ActionIcon

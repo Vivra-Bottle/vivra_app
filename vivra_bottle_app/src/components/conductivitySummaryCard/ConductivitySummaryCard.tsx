@@ -15,10 +15,12 @@ import { ConductivityLineChart } from "../conductivityLineChart/ConductivityLine
 
 interface ConductivitySummaryCardProps {
   data: { time: string; conductivity: number | undefined }[];
+  tooltipLabel: string;
 }
 
 export const ConductivitySummaryCard: FC<ConductivitySummaryCardProps> = ({
   data,
+  tooltipLabel,
 }) => {
   const lastestConductivity = data.at(-1)?.conductivity ?? "undefined";
 
@@ -35,7 +37,7 @@ export const ConductivitySummaryCard: FC<ConductivitySummaryCardProps> = ({
             w={220}
             withArrow
             transitionProps={{ duration: 200 }}
-            label="This is where the tooltip text will go"
+            label={tooltipLabel}
             position="bottom"
           >
             <ActionIcon
