@@ -1,5 +1,14 @@
 "use-client";
-import { Card, Text, Stack, Badge } from "@mantine/core";
+import {
+  Card,
+  Text,
+  Stack,
+  Badge,
+  Group,
+  Tooltip,
+  Image,
+  ActionIcon,
+} from "@mantine/core";
 import classes from "./ConductivityHistoryCard.module.css";
 import { FC } from "react";
 import { ConductivityHistoryLineChart } from "../conductivityHistoryLineChart/ConductivityHistoryLineChart";
@@ -7,16 +16,43 @@ import { ConductivityHistoryLineChart } from "../conductivityHistoryLineChart/Co
 export interface ConductivityHistoryCardProps {
   data: { day: string; dayabbrev: string; conductivity: number }[];
   average: number;
+  toolTipLabel: string;
 }
 
 export const ConductivityHistoryCard: FC<ConductivityHistoryCardProps> = ({
   data,
   average,
+  toolTipLabel,
 }) => {
   return (
     <Card withBorder p="xl" radius="md" className={classes.card}>
       <Stack className={classes.inner}>
-        <Text className={classes.title}>Water Conductivity</Text>
+        <Group className={classes.tooltipGroup}>
+          <Text className={classes.title}>Water Conductivity</Text>
+          <Tooltip
+            className={classes.tooltip}
+            multiline
+            w={220}
+            withArrow
+            transitionProps={{ duration: 200 }}
+            label={toolTipLabel}
+            position="bottom"
+          >
+            <ActionIcon
+              className={classes.tooltip}
+              variant="white"
+              title="Water Conductivity Info"
+            >
+              <Image
+                alt="info icon"
+                className={classes.color_icon}
+                src="/assets/icons/info-circle.svg"
+                height={24}
+                width={24}
+              />
+            </ActionIcon>
+          </Tooltip>
+        </Group>
         <Stack className={classes.averageSection}>
           <div className={classes.chart}>
             <ConductivityHistoryLineChart

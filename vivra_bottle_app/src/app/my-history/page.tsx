@@ -1,5 +1,13 @@
 "use client";
-import { Stack, Title, Badge } from "@mantine/core";
+import {
+  Stack,
+  Title,
+  Badge,
+  Group,
+  Tooltip,
+  ActionIcon,
+  Image,
+} from "@mantine/core";
 import classes from "./myHistory.module.css";
 import { ConsumptionHistoryCard } from "@/components/consumptionHistoryCard/ConsumptionHistoryCard";
 import { ConductivityHistoryCard } from "@/components/conductivityHistoryCard/ConductivityHistoryCard";
@@ -40,9 +48,34 @@ const averageConductivity =
 export default function MyHistory() {
   return (
     <Stack className={classes.stack}>
-      <Title order={2} className={classes.hydrationTitle}>
-        Hydration Score
-      </Title>
+      <Group className={classes.tooltipGroup}>
+        <Title order={2} className={classes.hydrationTitle}>
+          Hydration Score
+        </Title>
+        <Tooltip
+          className={classes.tooltip}
+          multiline
+          w={220}
+          withArrow
+          transitionProps={{ duration: 200 }}
+          label="This is where the tooltip text will go"
+          position="bottom"
+        >
+          <ActionIcon
+            className={classes.tooltip}
+            variant="transparent"
+            title="Hydration Score Info"
+          >
+            <Image
+              alt="info icon"
+              className={classes.color_icon}
+              src="/assets/icons/info-circle.svg"
+              height={24}
+              width={24}
+            />
+          </ActionIcon>
+        </Tooltip>
+      </Group>
       <Badge
         className={classes.hydrationScoreBadge}
         styles={{ label: { overflow: "visible" } }}
@@ -56,10 +89,12 @@ export default function MyHistory() {
         average={averageConsumption}
         data={consumptionData}
         goal={goal}
+        toolTipLabel="This is where the tooltip label will go"
       ></ConsumptionHistoryCard>
       <ConductivityHistoryCard
         average={averageConductivity}
         data={conductivityData}
+        toolTipLabel="This is where the tooltip label will go"
       ></ConductivityHistoryCard>
       <div style={{ height: "200px" }}></div>
     </Stack>

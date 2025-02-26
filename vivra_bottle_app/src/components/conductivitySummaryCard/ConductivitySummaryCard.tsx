@@ -1,5 +1,14 @@
 "use-client";
-import { Card, Text, Stack, Badge, Group } from "@mantine/core";
+import {
+  Card,
+  Text,
+  Stack,
+  Badge,
+  Group,
+  Tooltip,
+  ActionIcon,
+  Image,
+} from "@mantine/core";
 import classes from "./ConductivitySummaryCard.module.css";
 import { FC } from "react";
 import { ConductivityLineChart } from "../conductivityLineChart/ConductivityLineChart";
@@ -16,9 +25,34 @@ export const ConductivitySummaryCard: FC<ConductivitySummaryCardProps> = ({
   return (
     <Card withBorder p="xl" radius="md" className={classes.card}>
       <Stack className={classes.inner}>
-        <Text fz="xl" className={classes.label}>
-          Conductivity
-        </Text>
+        <Group className={classes.tooltipGroup}>
+          <Text fz="xl" className={classes.label}>
+            Conductivity
+          </Text>
+          <Tooltip
+            className={classes.tooltip}
+            multiline
+            w={220}
+            withArrow
+            transitionProps={{ duration: 200 }}
+            label="This is where the tooltip text will go"
+            position="bottom"
+          >
+            <ActionIcon
+              className={classes.tooltip}
+              variant="transparent"
+              title="Conductivity Info"
+            >
+              <Image
+                alt="info icon"
+                className={classes.color_icon}
+                src="/assets/icons/info-circle.svg"
+                height={22}
+                width={22}
+              />
+            </ActionIcon>
+          </Tooltip>
+        </Group>
         <Group className={classes.stats}>
           <Badge
             className={classes.conductivityBadge}

@@ -1,5 +1,14 @@
 "use-client";
-import { Card, Text, Stack, Badge } from "@mantine/core";
+import {
+  Card,
+  Text,
+  Stack,
+  Badge,
+  Group,
+  Tooltip,
+  ActionIcon,
+  Image,
+} from "@mantine/core";
 import classes from "./ConsumptionHistoryCard.module.css";
 import { FC } from "react";
 import { ConsumptionBarChart } from "../consumptionBarChart/ConsumptionBarChart";
@@ -12,17 +21,44 @@ interface ConsumptionHistoryCardProps {
   }[];
   goal: number;
   average: number;
+  toolTipLabel: string;
 }
 
 export const ConsumptionHistoryCard: FC<ConsumptionHistoryCardProps> = ({
   data,
   goal,
   average,
+  toolTipLabel,
 }) => {
   return (
     <Card withBorder p="xl" radius="md" className={classes.card}>
       <Stack className={classes.inner}>
-        <Text className={classes.title}>Water Consumption</Text>
+        <Group className={classes.tooltipGroup}>
+          <Text className={classes.title}>Water Consumption</Text>
+          <Tooltip
+            className={classes.tooltip}
+            multiline
+            w={220}
+            withArrow
+            transitionProps={{ duration: 200 }}
+            label={toolTipLabel}
+            position="bottom"
+          >
+            <ActionIcon
+              className={classes.tooltip}
+              variant="white"
+              title="Water Consumption Info"
+            >
+              <Image
+                alt="info icon"
+                className={classes.color_icon}
+                src="/assets/icons/info-circle.svg"
+                height={24}
+                width={24}
+              />
+            </ActionIcon>
+          </Tooltip>
+        </Group>
         <Stack className={classes.averageSection}>
           <div className={classes.chart}>
             <ConsumptionBarChart

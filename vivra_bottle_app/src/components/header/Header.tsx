@@ -124,13 +124,9 @@ export const Header: FC = () => {
             }}
           >
             <Image
-              alt={colorMode == "dark" ? "sun icon" : "moon icon"}
+              alt="bluetooth icon"
               className={classes.color_icon}
-              src={
-                colorMode == "dark"
-                  ? "/assets/icons/bluetooth-brands-solid.svg"
-                  : "/assets/icons/bluetooth-brands-solid.svg"
-              }
+              src="/assets/icons/bluetooth-brands-solid.svg"
               height={18}
               width={18}
             />

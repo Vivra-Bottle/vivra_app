@@ -4,6 +4,7 @@
   }
   
   .label {
+    padding-top: 2px;
     font-family:
       Greycliff CF,
       var(--mantine-font-family);
@@ -20,7 +21,7 @@
     justify-content:center;
     flex-direction: column;
     align-self: center;
-    width:419px;
+    width:444px;
     @media (max-width: 36em) {
       max-width:270px;
     }
@@ -39,4 +40,15 @@
       flex-grow: 1;
     }
     
+  }
+
+  .tooltipGroup{
+    gap:5px;
+    justify-self: center;
+    align-items:center;
+  }
+  
+  .tooltip{
+    align-self: start;
+    margin-top: 0;
   }

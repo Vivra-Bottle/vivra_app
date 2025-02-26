@@ -43,6 +43,7 @@ export default function Summary() {
             thickness={12}
           ></ProgressRing>
         }
+        tooltipLabel="The text for the tooltip will be added here"
         cardStats={
           <Stack className={classes.consumptionStats}>
             <Badge
@@ -72,6 +73,7 @@ export default function Summary() {
             {temp}°
           </Badge>
         }
+        tooltipLabel="The text for the tooltip will be added here"
         cardStats={
           <Stack className={classes.consumptionStats}>
             <TempQualBadge temperature={56}></TempQualBadge>

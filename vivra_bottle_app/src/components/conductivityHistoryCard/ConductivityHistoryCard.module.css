@@ -58,3 +58,12 @@
         flex-direction: column-reverse;
       }
     }
+
+    .tooltipGroup{
+      gap:5px;
+      align-self: center;
+    }
+
+    .tooltip{
+      align-self: flex-start;
+    }

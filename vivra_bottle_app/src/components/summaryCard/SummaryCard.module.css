@@ -66,3 +66,12 @@
       display: none;
     }
   }
+
+  .tooltipGroup{
+    gap:5px;
+    align-self: center;
+  }
+  
+  .tooltip{
+    align-self: center;
+  }
