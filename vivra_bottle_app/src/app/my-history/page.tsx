@@ -60,6 +60,7 @@ export default function MyHistory() {
           transitionProps={{ duration: 200 }}
           label="This is where the tooltip text will go"
           position="bottom"
+          events={{ hover: true, focus: true, touch: true }}
         >
           <ActionIcon
             className={classes.tooltip}

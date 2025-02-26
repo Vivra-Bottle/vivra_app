@@ -37,6 +37,7 @@ export const ConsumptionHistoryCard: FC<ConsumptionHistoryCardProps> = ({
           <Text className={classes.title}>Water Consumption</Text>
           <Tooltip
             className={classes.tooltip}
+            events={{ hover: true, focus: true, touch: true }}
             multiline
             w={220}
             withArrow

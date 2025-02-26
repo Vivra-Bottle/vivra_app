@@ -33,6 +33,7 @@ export const SummaryCard: FC<SummaryCardProps> = ({
             </Text>
             <Tooltip
               className={classes.tooltip}
+              events={{ hover: true, focus: true, touch: true }}
               multiline
               w={220}
               withArrow

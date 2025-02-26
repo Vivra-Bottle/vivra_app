@@ -33,6 +33,7 @@ export const ConductivitySummaryCard: FC<ConductivitySummaryCardProps> = ({
           </Text>
           <Tooltip
             className={classes.tooltip}
+            events={{ hover: true, focus: true, touch: true }}
             multiline
             w={220}
             withArrow
