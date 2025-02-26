@@ -4,7 +4,6 @@
   }
   
   .label {
-    
     font-family:
       Greycliff CF,
       var(--mantine-font-family);
@@ -23,10 +22,12 @@
   
   .inner {
     row-gap: 0;
+    width:457px;
     @media (max-width: 36em) {
       flex-direction: column;
       justify-content:center;
       row-gap: 0;
+      width:276px;
     }
   }
   
@@ -44,11 +45,12 @@
 
   .stats {
     align-self: flex-start; /* Align to the start on large screens */
-    margin-top:15px;
+    margin-top:5px;
 
     @media (max-width: 36em) {
       align-self: center;
       text-align: center;
+      margin-top:0px;
     }
   }
   

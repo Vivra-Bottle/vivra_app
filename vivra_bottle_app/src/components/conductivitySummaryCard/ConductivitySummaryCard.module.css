@@ -21,9 +21,9 @@
     justify-content:center;
     flex-direction: column;
     align-self: center;
-    width:444px;
+    width:457px;
     @media (max-width: 36em) {
-      max-width:270px;
+      max-width:276px;
     }
 
     .stats {

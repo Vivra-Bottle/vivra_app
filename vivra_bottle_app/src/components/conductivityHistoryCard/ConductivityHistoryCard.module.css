@@ -49,6 +49,7 @@
 
     .chart{
     transform: translateX(-10px);
+    padding-left: 10px;
 
     }
 

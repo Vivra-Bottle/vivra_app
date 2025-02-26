@@ -46,7 +46,7 @@ export const ConsumptionHistoryCard: FC<ConsumptionHistoryCardProps> = ({
           >
             <ActionIcon
               className={classes.tooltip}
-              variant="white"
+              variant="transparent"
               title="Water Consumption Info"
             >
               <Image

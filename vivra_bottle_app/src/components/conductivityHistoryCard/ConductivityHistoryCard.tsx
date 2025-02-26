@@ -40,7 +40,7 @@ export const ConductivityHistoryCard: FC<ConductivityHistoryCardProps> = ({
           >
             <ActionIcon
               className={classes.tooltip}
-              variant="white"
+              variant="transparent"
               title="Water Conductivity Info"
             >
               <Image
