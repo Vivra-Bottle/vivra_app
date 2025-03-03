@@ -10,7 +10,6 @@ import { ConductivitySummaryCard } from "@/components/conductivitySummaryCard/Co
 import { useEffect, useState } from "react";
 
 // TODO Delete and Replace with name from database
-const name = "Mary";
 const consumptionGoal = 2.4;
 const amountDrank = 1.1;
 const percentageDrank = Math.round((amountDrank / consumptionGoal) * 100);
