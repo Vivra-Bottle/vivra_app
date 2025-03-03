@@ -1,11 +1,13 @@
 "use client";
 import { ProgressRing } from "@/components/ProgressRing/ProgressRing";
 import { Badge, Stack, Title, Text } from "@mantine/core";
+import axios from "axios";
 
 import classes from "./page.module.css";
 import { SummaryCard } from "@/components/summaryCard/SummaryCard";
 import { TempQualBadge } from "@/components/tempQualBadge/TempQualBadge";
 import { ConductivitySummaryCard } from "@/components/conductivitySummaryCard/ConductivitySummaryCard";
+import { useEffect, useState } from "react";
 
 // TODO Delete and Replace with name from database
 const name = "Mary";
@@ -28,11 +30,38 @@ const conductivityData = [
   { time: "05:00 PM", conductivity: 700 },
 ];
 
+interface User {
+  gender: string;
+  weight: number;
+  age: number;
+  activity: number;
+  first_name: string;
+  last_name: string;
+}
+
 export default function Summary() {
+  const [user, setUser] = useState<User | null>(null);
+
+  const getData = async () => {
+    try {
+      const response = await axios.get('https://getuser-gxx3sm32mq-uc.a.run.app/');
+      setUser(response.data);
+      console.log(response);
+      console.log(user)
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  
+  useEffect(() => {
+    console.log("fetching data on load")
+    getData();
+  }, []) 
+  
   return (
     <Stack className={classes.stack}>
       <Title order={2} className={classes.name}>
-        Welcome, {name}
+        Welcome, {user?.first_name || "Guest"}
       </Title>
       <SummaryCard
         title="Water Consumption"
