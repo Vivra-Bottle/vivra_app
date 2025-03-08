@@ -29,6 +29,7 @@ const conductivityData = [
   { time: "05:00 PM", conductivity: 700 },
 ];
 
+// User details
 interface User {
   gender: string;
   weight: number;
@@ -39,24 +40,27 @@ interface User {
 }
 
 export default function Summary() {
+  // profile details
   const [user, setUser] = useState<User | null>(null);
 
   const getData = async () => {
     try {
-      const response = await axios.get('https://getuser-gxx3sm32mq-uc.a.run.app/');
+      const response = await axios.get(
+        "https://getuser-gxx3sm32mq-uc.a.run.app/"
+      );
       setUser(response.data);
       console.log(response);
-      console.log(user)
+      console.log(user);
     } catch (err) {
       console.error(err);
     }
-  }
-  
+  };
+
   useEffect(() => {
-    console.log("fetching data on load")
+    console.log("fetching data on load");
     getData();
-  }, []) 
-  
+  }, []);
+
   return (
     <Stack className={classes.stack}>
       <Title order={2} className={classes.name}>
