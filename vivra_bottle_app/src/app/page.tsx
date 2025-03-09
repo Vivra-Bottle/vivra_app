@@ -176,7 +176,7 @@ export default function Summary() {
             thickness={12}
           ></ProgressRing>
         }
-        tooltipLabel="See your hydration progress at a glance! Here is today's goal, intake, and progress."
+        tooltipLabel="See your hydration progress at a glance! Here is today&apos;s goal, intake, and progress."
         cardStats={
           <Stack className={classes.consumptionStats}>
             <Badge
@@ -218,7 +218,7 @@ export default function Summary() {
       ></SummaryCard>
       <ConductivitySummaryCard
         data={conductivity}
-        tooltipLabel="Monitor your water's conductivity throughout the day and quality score."
+        tooltipLabel="Monitor your water&apos;s conductivity throughout the day and quality score."
       ></ConductivitySummaryCard>
       <div style={{ marginTop: "50px" }}></div>
     </Stack>
