@@ -25,22 +25,32 @@ export default function AboutUs() {
       <Stack className={classes.about}>
         <Title order={2}>About us</Title>
         <Text>
-          Vivra was born from a mutual concern over water quality and hydration
-          levels in everyday life. We are a team of driven and innovative
-          4th-year students from the University of Waterloo&apos;s Faculty of
-          Nanotechnology Engineering, collectively bringing eight years of
-          industry experience.
+          Most people don't drink enough water. According to the World Health
+          Organization (WHO), inadequate hydration can lead to fatigue, reduced
+          cognitive function, and long-term health risks. At the same time,
+          water quality concerns stop many from drinking as much as they should.
         </Text>
         <Text>
-          Our mission is to promote health and well-being through proper
-          hydration practices, addressing both water quality and consumption. We
-          are currently designing and fabricating a smart water bottle that
-          leverages advanced sensor technology—down to the nanoscale—to monitor
-          both water quality and consumption.
+          Vivra was founded to solve both problems with the first-ever smart
+          water bottle that tracks both how much you drink and how safe your
+          water is. Our team—Nanotechnology Engineering students from the
+          University of Waterloo—has developed a bottle that integrates
+          precision sensors with intelligent tracking.
         </Text>
         <Text>
-          From the city with &quot;water&quot; in its name, we&apos;re leading
-          the way in smarter, safer hydration.
+          A load cell accurately measures water consumption, while a
+          custom-built conductivity sensor evaluates water purity. No other
+          product on the market combines real-time hydration tracking with water
+          quality assessment in a single, user-friendly system. Through our
+          intuitive digital interface, users gain personalized insights that
+          empower them to stay properly hydrated and make informed decisions
+          about their water. By blending cutting-edge technology with everyday
+          wellness, Vivra is redefining hydration—smarter, safer, and
+          personalized to your needs.
+        </Text>
+        <Text>
+          From the city with "water" in its name, we are committed to making
+          every sip count.
         </Text>
       </Stack>
       <Stack className={classes.founders}>
