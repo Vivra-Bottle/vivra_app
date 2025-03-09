@@ -9,11 +9,6 @@ import { TempQualBadge } from "@/components/tempQualBadge/TempQualBadge";
 import { ConductivitySummaryCard } from "@/components/conductivitySummaryCard/ConductivitySummaryCard";
 import { useEffect, useState } from "react";
 
-// TODO Delete and Replace with name from database
-const consumptionGoal = 2.4;
-const amountDrank = 1.1;
-const percentageDrank = Math.round((amountDrank / consumptionGoal) * 100);
-
 // User details
 interface User {
   gender: string;
@@ -81,7 +76,7 @@ export default function Summary() {
   const calculateWaterConsumption = (data: { [key: string]: number }) => {
     let volume = 0;
     let prev = null;
-    let keys = Object.keys(data);
+    const keys = Object.keys(data);
 
     for (let i = 0; i < keys.length; i++){
       if (prev != null && (data[keys[i]] - prev) < 0){
