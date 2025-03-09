@@ -113,7 +113,7 @@ export const Header: FC = () => {
           <ActionIcon
             className={classes.action_icon}
             variant="outline"
-            color={colorMode == "dark" ? "yellow" : "dark.7"}
+            color={colorMode == "dark" ? "blue" : "dark.7"}
             title="Color Scheme Toggle"
             onClick={() => {
               if (isBluetoothSupported) {

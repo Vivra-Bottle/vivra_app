@@ -39,11 +39,16 @@ interface User {
   last_name: string;
 }
 
+interface conductivityInDay {
+  time: string;
+  value: number;
+}
+
 export default function Summary() {
   // profile details
   const [user, setUser] = useState<User | null>(null);
 
-  const getData = async () => {
+  const getUserData = async () => {
     try {
       const response = await axios.get(
         "https://getuser-gxx3sm32mq-uc.a.run.app/"
@@ -58,7 +63,27 @@ export default function Summary() {
 
   useEffect(() => {
     console.log("fetching data on load");
-    getData();
+    getUserData();
+  }, []);
+
+  // TODO incomplete
+  // Conductivity Day data
+  const getDayConductivityData = async () => {
+    try {
+      const response = await axios.get(
+        "https://getallconductivitydataday-gxx3sm32mq-uc.a.run.app"
+      );
+      // setUser(response.data);
+      console.log(response.data);
+      // console.log(user);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    console.log("fetching data on load");
+    getDayConductivityData();
   }, []);
 
   return (
@@ -75,7 +100,7 @@ export default function Summary() {
             thickness={12}
           ></ProgressRing>
         }
-        tooltipLabel="The text for the tooltip will be added here"
+        tooltipLabel="See your hydration progress at a glance! Here is today's goal, intake, and progress."
         cardStats={
           <Stack className={classes.consumptionStats}>
             <Badge
@@ -105,7 +130,7 @@ export default function Summary() {
             {temp}°
           </Badge>
         }
-        tooltipLabel="The text for the tooltip will be added here"
+        tooltipLabel="See water temperature and its risk level for bacterial growth."
         cardStats={
           <Stack className={classes.consumptionStats}>
             <TempQualBadge temperature={56}></TempQualBadge>
@@ -117,7 +142,7 @@ export default function Summary() {
       ></SummaryCard>
       <ConductivitySummaryCard
         data={conductivityData}
-        tooltipLabel="The text for the tooltip will be added here"
+        tooltipLabel="Monitor your water's conductivity throughout the day and quality score."
       ></ConductivitySummaryCard>
       <div style={{ marginTop: "50px" }}></div>
     </Stack>

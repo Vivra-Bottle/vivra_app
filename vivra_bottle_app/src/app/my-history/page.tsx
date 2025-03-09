@@ -58,7 +58,7 @@ export default function MyHistory() {
           w={220}
           withArrow
           transitionProps={{ duration: 200 }}
-          label="This is where the tooltip text will go"
+          label="View your hydration score, calculated based on factors like age, gender, weight, height, and water intake."
           position="bottom"
           events={{ hover: true, focus: true, touch: true }}
         >
@@ -90,12 +90,12 @@ export default function MyHistory() {
         average={averageConsumption}
         data={consumptionData}
         goal={goal}
-        toolTipLabel="This is where the tooltip label will go"
+        toolTipLabel="Track your water consumption throughout the week and stay on top of your hydration goals."
       ></ConsumptionHistoryCard>
       <ConductivityHistoryCard
         average={averageConductivity}
         data={conductivityData}
-        toolTipLabel="This is where the tooltip label will go"
+        toolTipLabel="Monitor water conductivity throughout the week to track changes and ensure water quality."
       ></ConductivityHistoryCard>
       <div style={{ height: "200px" }}></div>
     </Stack>
