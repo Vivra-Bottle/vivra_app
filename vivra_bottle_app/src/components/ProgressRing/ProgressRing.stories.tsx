@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { MantineProvider } from "@mantine/core";
-import { FC } from "react";
+// import { FC } from "react";
 
 import { ProgressRing } from "./ProgressRing";
 
@@ -31,9 +31,9 @@ export const ProgressRingExample: Story = {
     thickness: 14,
   },
   decorators: [
-    (Story: FC) => (
+    () => (
       <MantineProvider>
-        <Story />
+
       </MantineProvider>
     ),
   ],

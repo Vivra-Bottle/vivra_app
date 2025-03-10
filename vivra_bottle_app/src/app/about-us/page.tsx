@@ -88,7 +88,7 @@ export default function AboutUs() {
       <Stack className={classes.about}>
         <Title order={2}>About us</Title>
         <Text>
-          Most people don't drink enough water. According to the World Health
+          Most people don&apos;t drink enough water. According to the World Health
           Organization (WHO), inadequate hydration can lead to fatigue, reduced
           cognitive function, and long-term health risks. At the same time,
           water quality concerns stop many from drinking as much as they should.
@@ -112,7 +112,7 @@ export default function AboutUs() {
           personalized to your needs.
         </Text>
         <Text>
-          From the city with "water" in its name, we are committed to making
+          From the city with &quot;water&quot; in its name, we are committed to making
           every sip count.
         </Text>
       </Stack>

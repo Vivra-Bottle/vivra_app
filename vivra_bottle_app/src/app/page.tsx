@@ -9,82 +9,158 @@ import { TempQualBadge } from "@/components/tempQualBadge/TempQualBadge";
 import { ConductivitySummaryCard } from "@/components/conductivitySummaryCard/ConductivitySummaryCard";
 import { useEffect, useState } from "react";
 
-// TODO Delete and Replace with name from database
-const consumptionGoal = 2.4;
-const amountDrank = 1.1;
-const percentageDrank = Math.round((amountDrank / consumptionGoal) * 100);
-const temp = 22;
-
-// Updated data with hours and conductivity values
-const conductivityData = [
-  { time: "08:00 AM", conductivity: 700 },
-  { time: "09:00 AM", conductivity: 600 },
-  { time: "10:00 AM", conductivity: 400 },
-  { time: "11:00 AM", conductivity: 80 },
-  { time: "12:00 PM", conductivity: 0 },
-  { time: "01:00 PM", conductivity: 2000 },
-  { time: "02:00 PM", conductivity: 200 },
-  { time: "03:00 PM", conductivity: 1000 },
-  { time: "04:00 PM", conductivity: 500 },
-  { time: "05:00 PM", conductivity: 700 },
-];
-
 // User details
 interface User {
   gender: string;
   weight: number;
+  goal: number;
   age: number;
   activity: number;
   first_name: string;
   last_name: string;
 }
 
-interface conductivityInDay {
-  time: string;
-  value: number;
+interface ConductivityData {
+  [time: string]: number; // The key is a time in 24-hour format and the value is a conductivity number
+}
+
+interface ConductivityItem {
+  time: string; // The time in 12-hour AM/PM format
+  conductivity: number; // The conductivity value
 }
 
 export default function Summary() {
   // profile details
   const [user, setUser] = useState<User | null>(null);
+  const [temp, setTemp] = useState(0);
+  const [consumption, setConsumption] = useState(0);
+  const [conductivity, setConductivity] = useState<ConductivityItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const sortDataByTime = (data: { [key: string]: number }): { [key: string]: number } => {
+    const dataArray = Object.entries(data);
+
+    const sortedArray = dataArray.sort(([timeA], [timeB]) => {
+      const [hoursA, minutesA] = timeA.split(':').map(Number);
+      const [hoursB, minutesB] = timeB.split(':').map(Number);
+  
+      const dateA = new Date(0, 0, 0, hoursA, minutesA); 
+      const dateB = new Date(0, 0, 0, hoursB, minutesB);
+  
+      return dateA.getTime() - dateB.getTime();
+    });
+  
+    const sortedData = Object.fromEntries(sortedArray);
+    return sortedData;
+  };
+  
+  const convertToConductivityArray = (data: ConductivityData): ConductivityItem[] => {
+    // Helper function to convert 24-hour time to 12-hour AM/PM format
+    const convertTo12HourFormat = (time24: string): string => {
+      const [hour, minute] = time24.split(":").map(Number);
+      const period = hour >= 12 ? "PM" : "AM";
+      const hour12 = hour % 12 || 12; // Convert 0 -> 12 for midnight
+      const minuteFormatted = minute < 10 ? `0${minute}` : minute;
+      return `${hour12}:${minuteFormatted} ${period}`;
+    };
+  
+    // Convert the dictionary to an array of objects
+    const result: ConductivityItem[] = Object.entries(data).map(([time24, conductivity]) => {
+      const time12 = convertTo12HourFormat(time24);
+      return { time: time12, conductivity };
+    });
+  
+    return result;
+  };
+
+  const calculateWaterConsumption = (data: { [key: string]: number }) => {
+    let volume = 0;
+    let prev = null;
+    const keys = Object.keys(data);
+
+    for (let i = 0; i < keys.length; i++){
+      if (prev != null && (data[keys[i]] - prev) < 0){
+        volume -= (data[keys[i]] - prev);
+      }
+      prev = data[keys[i]];
+    }
+
+    return volume
+  }
+
 
   const getUserData = async () => {
     try {
-      const response = await axios.get(
-        "https://getuser-gxx3sm32mq-uc.a.run.app/"
-      );
+      const response = await axios.get("https://getuser-gxx3sm32mq-uc.a.run.app/");
       setUser(response.data);
-      console.log(response);
-      console.log(user);
     } catch (err) {
       console.error(err);
     }
   };
 
-  useEffect(() => {
-    console.log("fetching data on load");
-    getUserData();
-  }, []);
-
-  // TODO incomplete
-  // Conductivity Day data
-  const getDayConductivityData = async () => {
+  const getDayConductivityData = async (date: string) => {
     try {
-      const response = await axios.get(
-        "https://getallconductivitydataday-gxx3sm32mq-uc.a.run.app"
-      );
-      // setUser(response.data);
+      const response = await axios.get("https://getdayconductivity-gxx3sm32mq-uc.a.run.app", { params: { date }});
+      const transformedData = convertToConductivityArray(response.data)
+      setConductivity(transformedData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getDayConsumptionData = async (date: string) => {
+    try {
+      const response = await axios.get("https://getdayloadcell-gxx3sm32mq-uc.a.run.app", { params: { date }});
+      console.log("Response load cell data: ");
       console.log(response.data);
-      // console.log(user);
+
+      const sortedData = sortDataByTime(response.data);
+      console.log("Sorted data: ");
+      console.log(sortedData);
+
+      const volume = calculateWaterConsumption(sortedData);
+      setConsumption(volume);
+      console.log("consumed: ");
+      console.log(volume);
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getDayTemperatureData = async (date: string) => {
+    try {
+      const response = await axios.get("https://getdaytemperature-gxx3sm32mq-uc.a.run.app", { params: { date }});
+      const sortedData = sortDataByTime(response.data);  // Sort the data
+      const sortedKeys = Object.keys(sortedData)
+      const finalKey = sortedKeys[sortedKeys.length - 1];
+      setTemp(sortedData[finalKey]);
+
     } catch (err) {
       console.error(err);
     }
   };
 
   useEffect(() => {
-    console.log("fetching data on load");
-    getDayConductivityData();
+    // console.log("fetching data on load");
+    getUserData();
+
+    // console.log("fetching conductivity data on load");
+    getDayConductivityData("2025-03-09");
+
+    // console.log("fetching consumption data  on load");
+    getDayConsumptionData("2025-03-09");
+
+    // console.log("fetching temperature data on load");
+    getDayTemperatureData("2025-03-09");
+
+    setLoading(false);
   }, []);
+
+  if (loading) {
+    // Return a loading spinner or message until the data is loaded
+    return <div>Loading...</div>;
+  }
 
   return (
     <Stack className={classes.stack}>
@@ -95,12 +171,12 @@ export default function Summary() {
         title="Water Consumption"
         graph={
           <ProgressRing
-            value={percentageDrank}
+            value={Math.round(((consumption/1000) / (user?.goal || 0)) * 100)}
             size={220}
             thickness={12}
           ></ProgressRing>
         }
-        tooltipLabel="See your hydration progress at a glance! Here is today's goal, intake, and progress."
+        tooltipLabel="See your hydration progress at a glance! Here is today&apos;s goal, intake, and progress."
         cardStats={
           <Stack className={classes.consumptionStats}>
             <Badge
@@ -108,14 +184,14 @@ export default function Summary() {
               color="blue"
               className={classes.consumptionBadge}
             >
-              Goal: {consumptionGoal} L/day
+              Goal: {user?.goal} L/day
             </Badge>
             <Badge
               variant="light"
               color="rgba(39, 176, 167, 1)"
               className={classes.consumptionBadge}
             >
-              You drank: {amountDrank} L
+              You drank: {consumption} mL
             </Badge>
           </Stack>
         }
@@ -133,7 +209,7 @@ export default function Summary() {
         tooltipLabel="See water temperature and its risk level for bacterial growth."
         cardStats={
           <Stack className={classes.consumptionStats}>
-            <TempQualBadge temperature={56}></TempQualBadge>
+            <TempQualBadge temperature={temp}></TempQualBadge>
             <Text className={classes.tempText}>
               High, Medium, and Low risk of bacterial growth
             </Text>
@@ -141,8 +217,8 @@ export default function Summary() {
         }
       ></SummaryCard>
       <ConductivitySummaryCard
-        data={conductivityData}
-        tooltipLabel="Monitor your water's conductivity throughout the day and quality score."
+        data={conductivity}
+        tooltipLabel="Monitor your water&apos;s conductivity throughout the day and quality score."
       ></ConductivitySummaryCard>
       <div style={{ marginTop: "50px" }}></div>
     </Stack>
