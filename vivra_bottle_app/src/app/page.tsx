@@ -1,6 +1,6 @@
 "use client";
 import { ProgressRing } from "@/components/ProgressRing/ProgressRing";
-import { Badge, Stack, Title, Text } from "@mantine/core";
+import { Badge, Stack, Title, Text, Loader } from "@mantine/core";
 import axios from "axios";
 
 import classes from "./page.module.css";
@@ -33,7 +33,7 @@ export default function Summary() {
   // profile details
   const [user, setUser] = useState<User | null>(null);
   const [temp, setTemp] = useState(0);
-  const [consumption, setConsumption] = useState(0);
+  const [consumption, setConsumption] = useState(10);
   const [conductivity, setConductivity] = useState<ConductivityItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -142,27 +142,43 @@ export default function Summary() {
   };
 
   useEffect(() => {
-    // console.log("fetching data on load");
-    getUserData();
+    const fetchData = async () => {
+      try {
+        await Promise.all([
+          getUserData(),
+          getDayConductivityData("2025-03-09"),
+          getDayConsumptionData("2025-03-09"),
+          getDayTemperatureData("2025-03-09"),
+        ]);
 
-    // console.log("fetching conductivity data on load");
-    getDayConductivityData("2025-03-09");
+        // // console.log("fetching data on load");
+        // getUserData();
 
-    // console.log("fetching consumption data  on load");
-    getDayConsumptionData("2025-03-09");
+        // // console.log("fetching conductivity data on load");
+        // getDayConductivityData("2025-03-09");
 
-    // console.log("fetching temperature data on load");
-    getDayTemperatureData("2025-03-09");
+        // // console.log("fetching consumption data  on load");
+        // getDayConsumptionData("2025-03-09");
 
-    setLoading(false);
+        // // console.log("fetching temperature data on load");
+        // getDayTemperatureData("2025-03-09");
+
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   if (loading) {
-    // Return a loading spinner or message until the data is loaded
-    return <div>Loading...</div>;
+    return <Loader size={30} />;
   }
 
   return (
+    
     <Stack className={classes.stack}>
       <Title order={2} className={classes.name}>
         Welcome, {user?.first_name || "Guest"}

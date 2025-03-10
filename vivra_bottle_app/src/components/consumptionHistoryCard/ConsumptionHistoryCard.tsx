@@ -13,6 +13,7 @@ import classes from "./ConsumptionHistoryCard.module.css";
 import { FC } from "react";
 import { ConsumptionBarChart } from "../consumptionBarChart/ConsumptionBarChart";
 
+
 interface ConsumptionHistoryCardProps {
   data: {
     day: string;
