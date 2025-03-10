@@ -28,7 +28,14 @@ const averageConsumption =
   consumptionData.length;
 
 const goal = 2.0; // Example daily goal in liters
-const hydrationScore = 98;
+const age = 23; //TODO change
+const heightInCM = 176;
+const weightInKG = 176;
+const gender = "male";
+
+const hydrationMale =
+  2.447 - 0.09156 * age + 0.1074 * heightInCM + 0.3362 * weightInKG;
+const hydrationFemale = -2.097 + 0.1069 * heightInCM + 0.2466 * weightInKG;
 
 //Conductivity data
 const conductivityData = [
@@ -44,6 +51,13 @@ const conductivityData = [
 const averageConductivity =
   conductivityData.reduce((sum, item) => sum + item.conductivity, 0) /
   conductivityData.length;
+
+const hydrationScoreMale = Math.round(
+  (averageConsumption * 100) / hydrationMale
+);
+const hydrationScoreFemale = Math.round(
+  (averageConsumption * 100) / hydrationFemale
+);
 
 export default function MyHistory() {
   return (
@@ -81,7 +95,7 @@ export default function MyHistory() {
         className={classes.hydrationScoreBadge}
         styles={{ label: { overflow: "visible" } }}
       >
-        {hydrationScore}
+        {gender == "male" ? hydrationScoreMale : hydrationScoreFemale}%
       </Badge>
       <Title order={2} className={classes.weeklyHistTitle}>
         Last 7-days:
