@@ -1,18 +1,81 @@
 "use client";
-import {
-  Stack,
-  Image,
-  Text,
-  Title,
-  //Timeline
-} from "@mantine/core";
+import { Stack, Image, Text, Title } from "@mantine/core";
 import classes from "./aboutUs.module.css";
 import { VivraTimeline } from "@/components/vivraTimeline/VivraTimeline";
 
 const vivraTimelineItems = [
-  { title: "Title 1", description: "Add text here", date: "January 2024" },
-  { title: "Title 2", description: "Add text here", date: "January 2024" },
-  { title: "Title 3", description: "Add text here", date: "January 2024" },
+  {
+    title: "Team Formation & Role Assignment",
+    description:
+      "Team members agreed to form a team with a diverse skill set, each memeber communicated their goals and expectations, and roles were defined based on expertise. Task management tools and communication channels were established.",
+    date: "August 2023",
+  },
+  {
+    title: "Ideation & Proposal",
+    description:
+      "Identified the problem, defined the project obvjectives, and drafted the formal proposal. Signed Dr. Saad as the team's consultant.",
+    date: "September 2023",
+  },
+  {
+    title: "Literature Review",
+    description:
+      "Conduct a comprehensive review of existing research, technologies, and the market for our problem space.",
+    date: "January 2024",
+  },
+  {
+    title: "Concept Development & Feasibility Assessment",
+    description:
+      "Performed Feasibility analysis based on budget, timeline, and technical constrainst, defined system architecture and key components, developed initial design and finalized project roadmap and milestones. Project scope was adjusted accordingly",
+    date: "September 2024",
+  },
+  {
+    title: "Simulations For Design Validation",
+    description:
+      "Used COMSOL multiphysics to model the consuctivity sensor to optomize geometry and dimensions. Simulations were used to validate temperature and conductivity ranges.",
+    date: "October 2024",
+  },
+  {
+    title: "Electrical Design & Firmware Prototyping Begins",
+    description:
+      "Develop first round of circuit schematics and PCB layouts, and writing initial firmware for sensor integration and data processing.",
+    date: "November 2024",
+  },
+  {
+    title: "Conductivity Sensor Fabrication",
+    description:
+      "Fabricated the conductivity sensor with some steps completed by the  Quantum-Nano Fabrication and Characterization Facility (QNFCF).",
+    date: "November 2024",
+  },
+  {
+    title: "Software App Development Begins",
+    description:
+      "Develop user interface and backend architecture, and established bluetooth communication between hardware and software.",
+    date: "January 2024",
+  },
+  {
+    title: "Mechanical Design",
+    description:
+      "Designed the physical structure of the water bottle for sensor housing and durability and ensured waterproofing and structural integrity for long-term use.",
+    date: "Februry 2024",
+  },
+  {
+    title: "Testing and Validation",
+    description:
+      "Conduct detailed performance testing on hardware and software integration, address technical challenges, and refined design.",
+    date: "Februry 2024",
+  },
+  {
+    title: "Seminar & Symposium",
+    description:
+      "Present final design and working prototype to faculty and members of the public at the nano-symposium and seminar",
+    date: "March 2024",
+  },
+  {
+    title: "Grad Toast",
+    description:
+      "Grad toast to celebrate capstone achievement and appreciate the Nanotechnology Engineering undergraduate journey.",
+    date: "April 2024",
+  },
 ];
 
 export default function AboutUs() {
@@ -63,7 +126,7 @@ export default function AboutUs() {
       </Stack>
       <Stack className={classes.story}>
         <Title order={2}>Vivra&apos;s Story</Title>
-        <VivraTimeline active={1} items={vivraTimelineItems}></VivraTimeline>
+        <VivraTimeline active={10} items={vivraTimelineItems}></VivraTimeline>
       </Stack>
     </Stack>
   );
