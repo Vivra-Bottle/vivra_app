@@ -14,10 +14,18 @@ export const TempQualBadge: FC<TempBadgeProps> = ({ temperature }) => {
       size="xl"
       variant="filled"
       color={
-        temperature <= 20 ? "lime" : temperature <= 25 ? "yellow" : "red.9"
+        temperature <= 20 || temperature >= 65
+          ? "lime"
+          : temperature <= 45
+          ? "red.9"
+          : "yellow"
       }
     >
-      {temperature <= 20 ? "Low" : temperature <= 25 ? "Medium" : "High"}
+      {temperature <= 20 || temperature >= 65
+        ? "Low"
+        : temperature <= 45
+        ? "High"
+        : "Medium"}
     </Badge>
   );
 };
