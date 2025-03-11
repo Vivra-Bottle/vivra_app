@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import classes from "./Header.module.css";
 import { Drawer } from "../drawer/Drawer";
 import Image from "next/image";
+import axios from "axios";
 
 export const Header: FC = () => {
   let bleDevice = null;
@@ -32,12 +33,34 @@ export const Header: FC = () => {
 
   const colorMode = useComputedColorScheme("light");
 
+  const postData = async (date: string, time: string, value: number) => {
+    try {
+      console.log("posting");
+      const response = await axios.post(
+        "https://writeloadcelldata-gxx3sm32mq-uc.a.run.app",
+        { date, time, value },
+        { headers: { "Content-Type": "application/json" } }
+      );
+  
+      console.log("Response:", response.status, response.data);
+  
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   function handleNotifications(event: Event) {
     const target = event.target as BluetoothRemoteGATTCharacteristic; // Type assertion
 
     if (target && target.value) {
       const value = new TextDecoder().decode(target.value);
       console.log("Received:", value);
+
+      const fullDate = new Date();
+      const time = fullDate.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+      const date = fullDate.toISOString().split("T")[0];
+
+      postData(date, time, Number(value));
     }
   }
 

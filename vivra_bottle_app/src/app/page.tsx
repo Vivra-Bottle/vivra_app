@@ -142,31 +142,24 @@ export default function Summary() {
   };
 
   useEffect(() => {
+    const fullDate = new Date();
+    const date = fullDate.toISOString().split("T")[0];
+
     const fetchData = async () => {
       try {
         await Promise.all([
           getUserData(),
-          getDayConductivityData("2025-03-09"),
-          getDayConsumptionData("2025-03-09"),
-          getDayTemperatureData("2025-03-09"),
+          getDayConductivityData(date),
+          getDayConsumptionData(date),
+          getDayTemperatureData(date),
         ]);
-
-        // // console.log("fetching data on load");
-        // getUserData();
-
-        // // console.log("fetching conductivity data on load");
-        // getDayConductivityData("2025-03-09");
-
-        // // console.log("fetching consumption data  on load");
-        // getDayConsumptionData("2025-03-09");
-
-        // // console.log("fetching temperature data on load");
-        // getDayTemperatureData("2025-03-09");
-
       } catch (err) {
         console.error(err);
       } finally {
         setLoading(false);
+
+        const date = new Date();
+        console.log(date);
       }
     };
 
@@ -187,9 +180,9 @@ export default function Summary() {
         title="Water Consumption"
         graph={
           <ProgressRing
-            value={Math.round(((consumption/1000) / (user?.goal || 0)) * 100)}
+            value={Math.min(100, (Math.round(((consumption/1000) / (user?.goal || 0)) * 100)))}
             size={220}
-            thickness={12}
+            thickness={12} 
           ></ProgressRing>
         }
         tooltipLabel="See your hydration progress at a glance! Here is today&apos;s goal, intake, and progress."

@@ -7,6 +7,7 @@ import {
   Tooltip,
   ActionIcon,
   Image,
+  Loader
 } from "@mantine/core";
 import classes from "./myHistory.module.css";
 import { ConsumptionHistoryCard } from "@/components/consumptionHistoryCard/ConsumptionHistoryCard";
@@ -31,19 +32,8 @@ interface ConductivityItem {
 
 
 //Consumption data
-const consumptionData = [
-  { day: "may 5th", consumption: 1.5, dayabbrev: "M"},
-  { day: "Tuesday", consumption: 2.2, dayabbrev: "M"},
-  { day: "Wednesday", consumption: 1.8, dayabbrev: "M"},
-  { day: "Thursday", consumption: 2.5, dayabbrev: "M"},
-  { day: "Friday", consumption: 3.0, dayabbrev: "M"},
-  { day: "Saturday", consumption: 2.7, dayabbrev: "M"},
-  { day: "Sunday", consumption: 1.9, dayabbrev: "M"},
-];
-
-const averageConsumption =
-  consumptionData.reduce((sum, entry) => sum + entry.consumption, 0) /
-  consumptionData.length;
+let consumptionData: any[] = [];
+let averageConsumptionval = 0;
 
 const goal = 2.0; // Example daily goal in liters
 const age = 23; //TODO change
@@ -79,12 +69,9 @@ const averageConductivity =
   conductivityData.reduce((sum, item) => sum + item.conductivity, 0) /
   conductivityData.length;
 
-const hydrationScoreMale = Math.round(
-  (averageConsumption * 100) / hydrationMale
-);
-const hydrationScoreFemale = Math.round(
-  (averageConsumption * 100) / hydrationFemale
-);
+const hydrationScoreMale = Math.round((averageConsumptionval/7 * 100) / hydrationMale);
+
+const hydrationScoreFemale =  Math.round((averageConsumptionval/7 * 100) / hydrationFemale);
 
 export default function MyHistory() {
   const [user, setUser] = useState<User | null>(null);
@@ -151,7 +138,10 @@ export default function MyHistory() {
     const keys = Object.keys(data);
 
     for (let i = 0; i < keys.length; i++){
+      // console.log(keys[i]);
+      // console.log(data[keys[i]] );
       if (prev != null && (data[keys[i]] - prev) < 0){
+        console.log(data[keys[i]] - prev);
         volume -= (data[keys[i]] - prev);
       }
       prev = data[keys[i]];
@@ -162,24 +152,18 @@ export default function MyHistory() {
 
   const getDayConsumptionData = async (date: string) => {
     try {
-      console.log("date: ");
-      console.log(date);
-
       const response = await axios.get("https://getdayloadcell-gxx3sm32mq-uc.a.run.app", { params: { date }});
       const sortedData = sortDataByTime(response.data);
       const formattedDate = getFormattedDate(date);
       const volume = calculateWaterConsumption(sortedData)/1000;
       const dateAbbrev = getDayAbbreviation(date);
       const data = {day: formattedDate, consumption: volume, dayabbrev: dateAbbrev};
-
-      // console.log("consumption: ");
+      // console.log("volume");
+      // console.log(volume);
+      // console.log("data");
       // console.log(data);
-
-      const updatedConsumption = [...consumption, data];
-      setConsumption(updatedConsumption);
-
-      // console.log("updated consumption: ");
-      // console.log(consumption);
+      consumptionData = [data, ...consumptionData];
+      averageConsumptionval = averageConsumption + data.consumption;
 
     } catch (err) {
       console.error(err);
@@ -219,10 +203,10 @@ export default function MyHistory() {
     for (let i = 0; i < 7; i++) {
       const date = new Date();
       date.setDate(date.getDate() - i);
-      
-      // Format the date to YYYY-MM-DD in Toronto's timezone
+      console.log(date);
+
       const formattedDate = date.toLocaleDateString('en-CA', {
-        timeZone: 'America/Toronto', // Set the timezone to Toronto
+        timeZone: 'America/Toronto',
       });
       
       const [year, month, day] = formattedDate.split('-');
@@ -231,22 +215,39 @@ export default function MyHistory() {
     return dates;
   };
 
-  useEffect(() => {
-    getUserData();
+  const fetchLast7Days = async () => {
+    const last7Days = getLast7Days();
+    for (const date of last7Days) {
+      await getDayConsumptionData(date);
+      await getDayConductivityData(date);
+    }
+  };
 
-    const fetchLast7Days = async () => {
-      const last7Days = getLast7Days();
-      for (const date of last7Days) {
-        await getDayConsumptionData(date);
-        await getDayConductivityData(date);
-        // getDayConsumptionData("2025-03-09");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await Promise.all([
+          getUserData(),
+          fetchLast7Days()
+        ]);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+
+        setConsumption(consumptionData);
+        console.log(averageConsumptionval);
+        setAverageConsumption(averageConsumptionval);
       }
     };
 
-    fetchLast7Days();
-    console.log('i fire once');
+    fetchData();
   }, []);
 
+
+  if (loading) {
+    return <Loader size={30} />;
+  }
 
   return (
     <Stack className={classes.stack}>
@@ -290,7 +291,7 @@ export default function MyHistory() {
       </Title>
       <ConsumptionHistoryCard
         average={averageConsumption}
-        data={consumptionData}
+        data={consumption}
         goal={user?.goal || 1.5}
         toolTipLabel="Track your water consumption throughout the week and stay on top of your hydration goals."
       ></ConsumptionHistoryCard>
