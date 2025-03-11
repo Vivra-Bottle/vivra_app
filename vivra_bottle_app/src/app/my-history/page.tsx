@@ -35,7 +35,6 @@ interface ConductivityItem {
 let consumptionData: any[] = [];
 let averageConsumptionval = 0;
 
-const goal = 2.0; // Example daily goal in liters
 const age = 23; //TODO change
 const heightInCM = 176;
 const weightInKG = 176;
@@ -65,9 +64,9 @@ interface ConductivityItem {
   conductivity: number; // The conductivity value
 }
 
-const averageConductivity =
-  conductivityData.reduce((sum, item) => sum + item.conductivity, 0) /
-  conductivityData.length;
+// const averageConductivity =
+//   conductivityData.reduce((sum, item) => sum + item.conductivity, 0) /
+//   conductivityData.length;
 
 const hydrationScoreMale = Math.round((averageConsumptionval/7 * 100) / hydrationMale);
 
@@ -237,7 +236,9 @@ export default function MyHistory() {
 
         setConsumption(consumptionData);
         console.log(averageConsumptionval);
+        console.log(conductivity);
         setAverageConsumption(averageConsumptionval);
+        setAverageConductivity(750);
       }
     };
 
