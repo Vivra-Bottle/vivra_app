@@ -32,7 +32,13 @@ interface ConductivityItem {
 
 
 //Consumption data
-let consumptionData = [];
+interface ConsumptionData {
+  day: string;
+  consumption: number;
+  dayabbrev: string;
+}
+
+let consumptionData: ConsumptionData[] = [];
 let averageConsumptionval = 0;
 
 const age = 23; //TODO change
