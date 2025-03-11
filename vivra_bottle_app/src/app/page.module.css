@@ -19,7 +19,7 @@
 
   @media (max-width: 36em) {
     margin-top:15px;
-    flex-direction: row;
+    flex-direction: column;
   }
 }
 

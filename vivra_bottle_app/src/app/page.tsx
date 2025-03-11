@@ -200,7 +200,7 @@ export default function Summary() {
               color="rgba(39, 176, 167, 1)"
               className={classes.consumptionBadge}
             >
-              You drank: {consumption} mL
+              You drank: {Math.round(consumption)} mL
             </Badge>
           </Stack>
         }
