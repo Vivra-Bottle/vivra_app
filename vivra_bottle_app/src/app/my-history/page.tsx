@@ -59,17 +59,14 @@ let averageConsumptionval = 0;
 const age = 23; //TODO change
 const heightInCM = 176;
 const weightInKG = 176;
-const gender = "male";
 
 const hydrationMale = 2.447 - 0.09156 * age + 0.1074 * heightInCM + 0.3362 * weightInKG;
-const hydrationFemale = -2.097 + 0.1069 * heightInCM + 0.2466 * weightInKG;
 
 //Conductivity data
 let conductivityData: ConductivityItem[] = [];
 let averageConductivityval = 0;
 
-const hydrationScoreMale = Math.round((averageConsumptionval/7 * 100) / hydrationMale);
-const hydrationScoreFemale =  Math.round((averageConsumptionval/7 * 100) / hydrationFemale);
+// const hydrationScoreMale = Math.round((averageConsumptionval * 100) / hydrationMale);
 
 export default function MyHistory() {
   const [user, setUser] = useState<User | null>(null);
@@ -96,7 +93,7 @@ export default function MyHistory() {
   };
 
   const getFormattedDate = (dateString: string): string => {
-    const [year, month, day] = dateString.split("-");
+    const [_year, month, day] = dateString.split("-");
     const monthString = monthMap[month];
 
     // Function to add ordinal suffix (st, nd, rd, th)
