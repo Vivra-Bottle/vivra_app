@@ -25,20 +25,35 @@ interface User {
   last_name: string;
 }
 
-interface ConductivityItem {
-  time: string; // The time in 12-hour AM/PM format
-  conductivity: number; // The conductivity value
-}
-
-
 //Consumption data
-interface ConsumptionData {
+interface ConsumptionItem {
   day: string;
-  consumption: number;
   dayabbrev: string;
+  consumption: number;
 }
 
-let consumptionData: ConsumptionData[] = [];
+interface ConductivityItem {
+  day: string;
+  dayabbrev: string;
+  conductivity: number;
+}
+
+const monthMap: { [key: string]: string } = {
+  "01": "January",
+  "02": "February",
+  "03": "March",
+  "04": "April",
+  "05": "May",
+  "06": "June",
+  "07": "July",
+  "08": "August",
+  "09": "September",
+  "10": "October",
+  "11": "November",
+  "12": "December",
+};
+
+let consumptionData: ConsumptionItem[] = [];
 let averageConsumptionval = 0;
 
 const age = 23; //TODO change
@@ -46,36 +61,14 @@ const heightInCM = 176;
 const weightInKG = 176;
 const gender = "male";
 
-const hydrationMale =
-  2.447 - 0.09156 * age + 0.1074 * heightInCM + 0.3362 * weightInKG;
+const hydrationMale = 2.447 - 0.09156 * age + 0.1074 * heightInCM + 0.3362 * weightInKG;
 const hydrationFemale = -2.097 + 0.1069 * heightInCM + 0.2466 * weightInKG;
 
 //Conductivity data
-const conductivityData = [
-  { day: "Monday", dayabbrev: "Mon", conductivity: 750 },
-  { day: "Tuesday", dayabbrev: "Tue", conductivity: 820 },
-  { day: "Wednesday", dayabbrev: "Wed", conductivity: 900 },
-  { day: "Thursday", dayabbrev: "Thu", conductivity: 1100 },
-  { day: "Friday", dayabbrev: "Fri", conductivity: 950 },
-  { day: "Saturday", dayabbrev: "Sat", conductivity: 1020 },
-  { day: "Sunday", dayabbrev: "Sun", conductivity: 870 },
-];
-
-interface ConductivityData {
-  [time: string]: number; // The key is a time in 24-hour format and the value is a conductivity number
-}
-
-interface ConductivityItem {
-  time: string; // The time in 12-hour AM/PM format
-  conductivity: number; // The conductivity value
-}
-
-// const averageConductivity =
-//   conductivityData.reduce((sum, item) => sum + item.conductivity, 0) /
-//   conductivityData.length;
+let conductivityData: ConductivityItem[] = [];
+let averageConductivityval = 0;
 
 const hydrationScoreMale = Math.round((averageConsumptionval/7 * 100) / hydrationMale);
-
 const hydrationScoreFemale =  Math.round((averageConsumptionval/7 * 100) / hydrationFemale);
 
 export default function MyHistory() {
@@ -83,8 +76,9 @@ export default function MyHistory() {
   const [consumption, setConsumption] = useState<{day: string; consumption: number; dayabbrev: string; }[]>([]);
   const [averageConsumption, setAverageConsumption] = useState(0);
 
-  const [conductivity, setConductivity] = useState<ConductivityItem[]>([]);
+  const [conductivity, setConductivity] = useState<{day: string; conductivity: number; dayabbrev: string; }[]>([]);
   const [averageConductivity, setAverageConductivity] = useState(0);
+  const [hydrationScore, setHydrationScore] = useState(0);
   const [loading, setLoading] = useState<boolean>(true);
 
   const getUserData = async () => {
@@ -102,11 +96,9 @@ export default function MyHistory() {
   };
 
   const getFormattedDate = (dateString: string): string => {
-    const date = new Date(dateString);
-  
-    const month = date.toLocaleDateString("en-US", { month: "long" });
-    const day = date.getDate();
-  
+    const [year, month, day] = dateString.split("-");
+    const monthString = monthMap[month];
+
     // Function to add ordinal suffix (st, nd, rd, th)
     const getOrdinalSuffix = (num: number): string => {
       if (num >= 11 && num <= 13) return `${num}th`; // Special case for 11-13
@@ -117,7 +109,7 @@ export default function MyHistory() {
       return `${num}th`;
     };
   
-    return `${month} ${getOrdinalSuffix(day)}`;
+    return `${monthString} ${getOrdinalSuffix(Number(day))}`;
   };
 
   const sortDataByTime = (data: { [key: string]: number }): { [key: string]: number } => {
@@ -143,10 +135,7 @@ export default function MyHistory() {
     const keys = Object.keys(data);
 
     for (let i = 0; i < keys.length; i++){
-      // console.log(keys[i]);
-      // console.log(data[keys[i]] );
       if (prev != null && (data[keys[i]] - prev) < 0){
-        console.log(data[keys[i]] - prev);
         volume -= (data[keys[i]] - prev);
       }
       prev = data[keys[i]];
@@ -163,10 +152,7 @@ export default function MyHistory() {
       const volume = calculateWaterConsumption(sortedData)/1000;
       const dateAbbrev = getDayAbbreviation(date);
       const data = {day: formattedDate, consumption: volume, dayabbrev: dateAbbrev};
-      // console.log("volume");
-      // console.log(volume);
-      // console.log("data");
-      // console.log(data);
+
       consumptionData = [data, ...consumptionData];
       averageConsumptionval = averageConsumption + data.consumption;
 
@@ -175,29 +161,28 @@ export default function MyHistory() {
     }
   };
   
-  const convertToConductivityArray = (data: ConductivityData): ConductivityItem[] => {
-    // Helper function to convert 24-hour time to 12-hour AM/PM format
-    const convertTo12HourFormat = (time24: string): string => {
-      const [hour, minute] = time24.split(":").map(Number);
-      const period = hour >= 12 ? "PM" : "AM";
-      const hour12 = hour % 12 || 12; // Convert 0 -> 12 for midnight
-      const minuteFormatted = minute < 10 ? `0${minute}` : minute;
-      return `${hour12}:${minuteFormatted} ${period}`;
-    };
-  
-    // Convert the dictionary to an array of objects
-    const result: ConductivityItem[] = Object.entries(data).map(([time24, conductivity]) => {
-      const time12 = convertTo12HourFormat(time24);
-      return { time: time12, conductivity };
-    });
-  
-    return result;
-  };
+  const getAverageConductivity = (data: {string:number}) => {
+    let conductivity = 0;
+    const values = Object.values(data);
+
+    for (let i = 0; i < values.length; i++) {
+      conductivity += values[i];
+    }
+
+    return (conductivity/values.length);
+  }
+
   const getDayConductivityData = async (date: string) => {
     try {
       const response = await axios.get("https://getdayconductivity-gxx3sm32mq-uc.a.run.app", { params: { date }});
-      const transformedData = convertToConductivityArray(response.data)
-      setConductivity(transformedData);
+
+      const formattedDate = getFormattedDate(date);
+      const dateAbbrev = getDayAbbreviation(date);
+      const conductivity = getAverageConductivity(response.data);
+      const data = {day: formattedDate, dayabbrev: dateAbbrev, conductivity: conductivity};
+
+      conductivityData = [data, ...conductivityData];
+      averageConductivityval = averageConductivityval + data.conductivity;
     } catch (err) {
       console.error(err);
     }
@@ -208,7 +193,6 @@ export default function MyHistory() {
     for (let i = 0; i < 7; i++) {
       const date = new Date();
       date.setDate(date.getDate() - i);
-      console.log(date);
 
       const formattedDate = date.toLocaleDateString('en-CA', {
         timeZone: 'America/Toronto',
@@ -241,10 +225,11 @@ export default function MyHistory() {
         setLoading(false);
 
         setConsumption(consumptionData);
-        console.log(averageConsumptionval);
-        console.log(conductivity);
         setAverageConsumption(averageConsumptionval);
-        setAverageConductivity(750);
+        
+        setConductivity(conductivityData);
+        setAverageConductivity(averageConductivityval/7);
+        setHydrationScore(Math.round(hydrationMale))
       }
     };
 
@@ -291,7 +276,7 @@ export default function MyHistory() {
         className={classes.hydrationScoreBadge}
         styles={{ label: { overflow: "visible" } }}
       >
-        {gender == "male" ? hydrationScoreMale : hydrationScoreFemale}%
+        {hydrationScore}%
       </Badge>
       <Title order={2} className={classes.weeklyHistTitle}>
         Last 7-days:
@@ -304,7 +289,7 @@ export default function MyHistory() {
       ></ConsumptionHistoryCard>
       <ConductivityHistoryCard
         average={averageConductivity}
-        data={conductivityData}
+        data={conductivity}
         toolTipLabel="Monitor water conductivity throughout the week to track changes and ensure water quality."
       ></ConductivityHistoryCard>
       <div style={{ height: "200px" }}></div>
