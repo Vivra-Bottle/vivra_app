@@ -93,7 +93,7 @@ export default function MyHistory() {
   };
 
   const getFormattedDate = (dateString: string): string => {
-    const [_year, month, day] = dateString.split("-");
+    const [, month, day] = dateString.split("-");
     const monthString = monthMap[month];
 
     // Function to add ordinal suffix (st, nd, rd, th)
