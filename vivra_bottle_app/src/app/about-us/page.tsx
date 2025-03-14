@@ -81,10 +81,14 @@ const vivraTimelineItems = [
 export default function AboutUs() {
   return (
     <Stack display="Flex" mt={59} mb={59}>
-      <Image
-        alt="Water Bottle Picture"
-        src="/assets/pictures/water-bottle.jpg"
-      ></Image>
+      <Stack className={classes.founders}>
+        <Title order={2}>Founders</Title>
+        <Image
+          radius="md"
+          alt="Team picture"
+          src="/assets/pictures/team-picture.jpg"
+        ></Image>
+      </Stack>
       <Stack className={classes.about}>
         <Title order={2}>About us</Title>
         <Text>
@@ -115,14 +119,6 @@ export default function AboutUs() {
           From the city with &quot;water&quot; in its name, we are committed to making
           every sip count.
         </Text>
-      </Stack>
-      <Stack className={classes.founders}>
-        <Title order={2}>Founders</Title>
-        <Image
-          radius="md"
-          alt="Team picture"
-          src="/assets/pictures/team-picture.jpg"
-        ></Image>
       </Stack>
       <Stack className={classes.story}>
         <Title order={2}>Vivra&apos;s Story</Title>
