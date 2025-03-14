@@ -50,31 +50,31 @@ const vivraTimelineItems = [
     title: "Software App Development Begins",
     description:
       "Develop user interface and backend architecture, and established bluetooth communication between hardware and software.",
-    date: "January 2024",
+    date: "January 2025",
   },
   {
     title: "Mechanical Design",
     description:
       "Designed the physical structure of the water bottle for sensor housing and durability and ensured waterproofing and structural integrity for long-term use.",
-    date: "Februry 2024",
+    date: "Februry 2025",
   },
   {
     title: "Testing and Validation",
     description:
       "Conduct detailed performance testing on hardware and software integration, address technical challenges, and refined design.",
-    date: "Februry 2024",
+    date: "Februry 2025",
   },
   {
     title: "Seminar & Symposium",
     description:
       "Present final design and working prototype to faculty and members of the public at the nano-symposium and seminar",
-    date: "March 2024",
+    date: "March 2025",
   },
   {
     title: "Grad Toast",
     description:
       "Grad toast to celebrate capstone achievement and appreciate the Nanotechnology Engineering undergraduate journey.",
-    date: "April 2024",
+    date: "April 2025",
   },
 ];
 
@@ -92,10 +92,11 @@ export default function AboutUs() {
       <Stack className={classes.about}>
         <Title order={2}>About us</Title>
         <Text>
-          Most people don&apos;t drink enough water. According to the World Health
-          Organization (WHO), inadequate hydration can lead to fatigue, reduced
-          cognitive function, and long-term health risks. At the same time,
-          water quality concerns stop many from drinking as much as they should.
+          Most people don&apos;t drink enough water. According to the World
+          Health Organization (WHO), inadequate hydration can lead to fatigue,
+          reduced cognitive function, and long-term health risks. At the same
+          time, water quality concerns stop many from drinking as much as they
+          should.
         </Text>
         <Text>
           Vivra was founded to solve both problems with the first-ever smart
@@ -116,8 +117,8 @@ export default function AboutUs() {
           personalized to your needs.
         </Text>
         <Text>
-          From the city with &quot;water&quot; in its name, we are committed to making
-          every sip count.
+          From the city with &quot;water&quot; in its name, we are committed to
+          making every sip count.
         </Text>
       </Stack>
       <Stack className={classes.story}>
