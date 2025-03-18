@@ -88,54 +88,10 @@ export default function Summary() {
     return volume
   }
 
-
   const getUserData = async () => {
     try {
       const response = await axios.get("https://getuser-gxx3sm32mq-uc.a.run.app/");
       setUser(response.data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const getDayConductivityData = async (date: string) => {
-    try {
-      const response = await axios.get("https://getdayconductivity-gxx3sm32mq-uc.a.run.app", { params: { date }});
-      const transformedData = convertToConductivityArray(response.data)
-      setConductivity(transformedData);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const getDayConsumptionData = async (date: string) => {
-    try {
-      const response = await axios.get("https://getdayloadcell-gxx3sm32mq-uc.a.run.app", { params: { date }});
-      console.log("Response load cell data: ");
-      console.log(response.data);
-
-      const sortedData = sortDataByTime(response.data);
-      console.log("Sorted data: ");
-      console.log(sortedData);
-
-      const volume = calculateWaterConsumption(sortedData);
-      setConsumption(volume);
-      console.log("consumed: ");
-      console.log(volume);
-
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const getDayTemperatureData = async (date: string) => {
-    try {
-      const response = await axios.get("https://getdaytemperature-gxx3sm32mq-uc.a.run.app", { params: { date }});
-      const sortedData = sortDataByTime(response.data);  // Sort the data
-      const sortedKeys = Object.keys(sortedData)
-      const finalKey = sortedKeys[sortedKeys.length - 1];
-      setTemp(sortedData[finalKey]);
-
     } catch (err) {
       console.error(err);
     }
