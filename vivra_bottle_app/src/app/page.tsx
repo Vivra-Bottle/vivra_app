@@ -141,17 +141,46 @@ export default function Summary() {
     }
   };
 
+  const getAllData = async (date:string) => {
+    try {
+      const response = await axios.get("https://getalldata-gxx3sm32mq-uc.a.run.app", {params: {date}});
+      console.log(response.data);
+
+      //Load cell
+      const sortedDataLC = sortDataByTime(response.data.load_cell);
+      const volume = calculateWaterConsumption(sortedDataLC);
+      setConsumption(volume);
+
+      //Temperature
+      const sortedData = sortDataByTime(response.data.temperature);  // Sort the data
+      const sortedKeys = Object.keys(sortedData)
+      const finalKey = sortedKeys[sortedKeys.length - 1];
+      setTemp(sortedData[finalKey]);
+
+      //Conductivity
+      const transformedData = convertToConductivityArray(response.data.conductivity)
+      setConductivity(transformedData);
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     const fullDate = new Date();
-    const date = fullDate.toISOString().split("T")[0];
+    const torontoDate = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "America/Toronto",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+    }).format(fullDate);
+
 
     const fetchData = async () => {
       try {
         await Promise.all([
           getUserData(),
-          getDayConductivityData(date),
-          getDayConsumptionData(date),
-          getDayTemperatureData(date),
+          getAllData(torontoDate),
         ]);
       } catch (err) {
         console.error(err);
