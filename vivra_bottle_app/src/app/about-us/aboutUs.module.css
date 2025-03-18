@@ -1,7 +1,7 @@
 .about {
     padding-inline: 24px;
     padding-top: 15px;
-    padding-bottom: 15px;
+    padding-bottom: 20px;
     row-gap: 8px;
     background-color: light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))
 }
