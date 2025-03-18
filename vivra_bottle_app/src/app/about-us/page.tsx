@@ -7,7 +7,7 @@ const vivraTimelineItems = [
   {
     title: "Team Formation & Role Assignment",
     description:
-      "Team members agreed to form a team with a diverse skill set, each memeber communicated their goals and expectations, and roles were defined based on expertise. Task management tools and communication channels were established.",
+      "Team members agreed to form a team with a diverse skill set, each member communicated their goals and expectations, and roles were defined based on expertise. Task management tools and communication channels were established.",
     date: "August 2023",
   },
   {
@@ -82,7 +82,7 @@ export default function AboutUs() {
   return (
     <Stack display="Flex" mt={59} mb={59}>
       <Stack className={classes.founders}>
-        <Title order={2}>Founders</Title>
+        <Title order={2}>Meet the Founders</Title>
         <Image
           radius="md"
           alt="Team picture"
