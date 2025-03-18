@@ -66,13 +66,10 @@ const hydrationMale = 2.447 - 0.09156 * age + 0.1074 * heightInCM + 0.3362 * wei
 let conductivityData: ConductivityItem[] = [];
 let averageConductivityval = 0;
 
-// const hydrationScoreMale = Math.round((averageConsumptionval * 100) / hydrationMale);
-
 export default function MyHistory() {
   const [user, setUser] = useState<User | null>(null);
   const [consumption, setConsumption] = useState<{day: string; consumption: number; dayabbrev: string; }[]>([]);
   const [averageConsumption, setAverageConsumption] = useState(0);
-
   const [conductivity, setConductivity] = useState<{day: string; conductivity: number; dayabbrev: string; }[]>([]);
   const [averageConductivity, setAverageConductivity] = useState(0);
   const [hydrationScore, setHydrationScore] = useState(0);
@@ -141,22 +138,22 @@ export default function MyHistory() {
     return volume
   }
 
-  const getDayConsumptionData = async (date: string) => {
-    try {
-      const response = await axios.get("https://getdayloadcell-gxx3sm32mq-uc.a.run.app", { params: { date }});
-      const sortedData = sortDataByTime(response.data);
-      const formattedDate = getFormattedDate(date);
-      const volume = calculateWaterConsumption(sortedData)/1000;
-      const dateAbbrev = getDayAbbreviation(date);
-      const data = {day: formattedDate, consumption: volume, dayabbrev: dateAbbrev};
+  // const getDayConsumptionData = async (date: string) => {
+  //   try {
+  //     const response = await axios.get("https://getdayloadcell-gxx3sm32mq-uc.a.run.app", { params: { date }});
+  //     const sortedData = sortDataByTime(response.data);
+  //     const formattedDate = getFormattedDate(date);
+  //     const volume = calculateWaterConsumption(sortedData)/1000;
+  //     const dateAbbrev = getDayAbbreviation(date);
+  //     const data = {day: formattedDate, consumption: volume, dayabbrev: dateAbbrev};
 
-      consumptionData = [data, ...consumptionData];
-      averageConsumptionval = averageConsumption + data.consumption;
+  //     consumptionData = [data, ...consumptionData];
+  //     averageConsumptionval = averageConsumption + data.consumption;
 
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
   
   const getAverageConductivity = (data: {string:number}) => {
     let conductivity = 0;
@@ -169,21 +166,21 @@ export default function MyHistory() {
     return (conductivity/values.length);
   }
 
-  const getDayConductivityData = async (date: string) => {
-    try {
-      const response = await axios.get("https://getdayconductivity-gxx3sm32mq-uc.a.run.app", { params: { date }});
+  // const getDayConductivityData = async (date: string) => {
+  //   try {
+  //     const response = await axios.get("https://getdayconductivity-gxx3sm32mq-uc.a.run.app", { params: { date }});
 
-      const formattedDate = getFormattedDate(date);
-      const dateAbbrev = getDayAbbreviation(date);
-      const conductivity = getAverageConductivity(response.data);
-      const data = {day: formattedDate, dayabbrev: dateAbbrev, conductivity: conductivity};
+  //     const formattedDate = getFormattedDate(date);
+  //     const dateAbbrev = getDayAbbreviation(date);
+  //     const conductivity = getAverageConductivity(response.data);
+  //     const data = {day: formattedDate, dayabbrev: dateAbbrev, conductivity: conductivity};
 
-      conductivityData = [data, ...conductivityData];
-      averageConductivityval = averageConductivityval + data.conductivity;
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  //     conductivityData = [data, ...conductivityData];
+  //     averageConductivityval = averageConductivityval + data.conductivity;
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   const getLast7Days = (): string[] => {
     const dates = [];
@@ -201,11 +198,41 @@ export default function MyHistory() {
     return dates;
   };
 
+  const getAllData = async (date:string) => {
+    try {
+      const response = await axios.get("https://getalldata-gxx3sm32mq-uc.a.run.app", {params: {date}});
+      console.log(response.data);
+
+      //Load cell
+      const sortedDataLC = sortDataByTime(response.data.load_cell);
+      const formattedDateLC = getFormattedDate(date);
+      const volume = calculateWaterConsumption(sortedDataLC);
+      const dateAbbrevLC = getDayAbbreviation(date);
+      const dataLC = {day: formattedDateLC, consumption: volume, dayabbrev: dateAbbrevLC};
+      consumptionData = [dataLC, ...consumptionData];
+      averageConsumptionval = averageConsumption + dataLC.consumption;
+
+
+      //Conductivity
+      const formattedDate = getFormattedDate(date);
+      const dateAbbrev = getDayAbbreviation(date);
+      const conductivity = getAverageConductivity(response.data);
+      const data = {day: formattedDate, dayabbrev: dateAbbrev, conductivity: conductivity};
+
+      conductivityData = [data, ...conductivityData];
+      averageConductivityval = averageConductivityval + data.conductivity;
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const fetchLast7Days = async () => {
     const last7Days = getLast7Days();
     for (const date of last7Days) {
-      await getDayConsumptionData(date);
-      await getDayConductivityData(date);
+      // await getDayConsumptionData(date);
+      // await getDayConductivityData(date);
+      await getAllData(date);
     }
   };
 
