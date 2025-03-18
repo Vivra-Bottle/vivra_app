@@ -2,15 +2,14 @@
     padding-inline: 24px;
     margin-top: 10px;
     row-gap: 8px;
+    background-color: light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))
 }
 
 .founders {
     padding-inline: 24px;
-    /* margin-top: 10px; */
     padding-top: 15px;
     padding-bottom: 35px;
     row-gap: 8px;
-    background-color: light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))
 }
 
 .story {
