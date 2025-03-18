@@ -19,37 +19,37 @@ const vivraTimelineItems = [
   {
     title: "Literature Review",
     description:
-      "Conduct a comprehensive review of existing research, technologies, and the market for our problem space.",
+      "Conducted a comprehensive review of existing research, technologies, and the market for our problem space.",
     date: "January 2024",
   },
   {
     title: "Concept Development & Feasibility Assessment",
     description:
-      "Performed Feasibility analysis based on budget, timeline, and technical constrainst, defined system architecture and key components, developed initial design and finalized project roadmap and milestones. Project scope was adjusted accordingly",
+      "Performed feasibility analysis based on budget, timeline, and technical constraint, defined system architecture and key components, developed initial design and finalized project roadmap and milestones. Project scope was adjusted accordingly.",
     date: "September 2024",
   },
   {
     title: "Simulations For Design Validation",
     description:
-      "Used COMSOL multiphysics to model the consuctivity sensor to optomize geometry and dimensions. Simulations were used to validate temperature and conductivity ranges.",
+      "Used COMSOL multiphysics to model the conductivity sensor to optimize geometry and dimensions. Simulations were used to validate temperature and conductivity ranges.",
     date: "October 2024",
   },
   {
     title: "Electrical Design & Firmware Prototyping Begins",
     description:
-      "Develop first round of circuit schematics and PCB layouts, and writing initial firmware for sensor integration and data processing.",
+      "Developed first round of circuit schematics and PCB layouts, and wrote initial firmware for sensor integration and data processing.",
     date: "November 2024",
   },
   {
     title: "Conductivity Sensor Fabrication",
     description:
-      "Fabricated the conductivity sensor with some steps completed by the  Quantum-Nano Fabrication and Characterization Facility (QNFCF).",
+      "Fabricated the conductivity sensor with some steps completed by the Quantum-Nano Fabrication and Characterization Facility (QNFCF).",
     date: "November 2024",
   },
   {
     title: "Software App Development Begins",
     description:
-      "Develop user interface and backend architecture, and established bluetooth communication between hardware and software.",
+      "Developed user interface and backend architecture, and established bluetooth communication between hardware and software.",
     date: "January 2025",
   },
   {
@@ -61,13 +61,13 @@ const vivraTimelineItems = [
   {
     title: "Testing and Validation",
     description:
-      "Conduct detailed performance testing on hardware and software integration, address technical challenges, and refined design.",
+      "Conducted detailed performance testing on hardware and software integration, address technical challenges, and refined design.",
     date: "Februry 2025",
   },
   {
     title: "Seminar & Symposium",
     description:
-      "Present final design and working prototype to faculty and members of the public at the nano-symposium and seminar",
+      "Presented final design and working prototype to faculty and members of the public at the nano-symposium and seminar.",
     date: "March 2025",
   },
   {
