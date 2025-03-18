@@ -13,7 +13,7 @@ const vivraTimelineItems = [
   {
     title: "Ideation & Proposal",
     description:
-      "Identified the problem, defined the project obvjectives, and drafted the formal proposal. Signed Dr. Saad as the team's consultant.",
+      "Identified the problem, defined the project objectives, and drafted the formal proposal. Signed Dr. Saad as the team's consultant.",
     date: "September 2023",
   },
   {
