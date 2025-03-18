@@ -227,7 +227,7 @@ export default function Summary() {
       ></SummaryCard>
       <ConductivitySummaryCard
         data={conductivity}
-        tooltipLabel="Conductivity helps in analyzing factors that affect water quality like hardness and detect heavy metal presence to ensure a healthy balance of minerals in your water"
+        tooltipLabel="Conductivity informs mineral content dictating hydration quality to ensure a healthy balance of minerals in your water"
       ></ConductivitySummaryCard>
       <div style={{ marginTop: "50px" }}></div>
     </Stack>
